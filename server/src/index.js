@@ -22,6 +22,7 @@ app.use(tankRouter);
 app.use(testsRouter);
 
 // Serve static assets in production
+// if (process.env.NODE_ENV === 'production') {}
 const root = require("path").join(__dirname, "client", "build");
 app.use(express.static(root));
 
