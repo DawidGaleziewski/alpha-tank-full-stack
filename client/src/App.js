@@ -2,6 +2,20 @@ import React from 'react';
 import logo from './logo.svg';
 import './App.css';
 
+async function testapi(){
+  fetch('http://localhost:3000/users/me').then((response)=> {
+
+    console.log(response)
+    return response.json();
+  }).then(data => {
+    console.log(data)
+  }).catch(error => {
+    console.log(error)
+  })
+}
+
+testapi()
+
 function App() {
   return (
     <div className="App">
