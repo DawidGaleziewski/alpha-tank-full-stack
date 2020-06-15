@@ -48,10 +48,11 @@ router.post("/users/logout/all", auth, async (req, res) => {
 // Create user
 router.post("/users", async (req, res) => {
   const user = await new User(req.body);
+  const token = await user.generateToken();
 
   try {
     await user.save();
-    res.status(200).send(user);
+    res.status(200).send({user, token});
   } catch (error) {
     res.status(400).send(error);
   }
