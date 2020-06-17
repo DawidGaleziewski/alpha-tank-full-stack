@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import RegisterForm from './components/Forms/RegisterForm';
 import LoginForm from './components/Forms/LoginForm';
+import AddTankForm from './components/Forms/AddTankForm';
 
 function App() {
   const setUserAuthStateHandler = (userAuthData) => {
@@ -12,8 +13,9 @@ function App() {
 
   return (
     <div className="App">
-      <RegisterForm />
+      <RegisterForm setUserAuth={setUserAuthStateHandler} />
       <LoginForm setUserAuth={setUserAuthStateHandler} />
+      <AddTankForm setUserAuth={setUserAuthStateHandler} userAuthState={userAuthState} />
     </div>
   );
 }

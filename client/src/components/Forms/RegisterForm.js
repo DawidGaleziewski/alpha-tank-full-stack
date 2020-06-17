@@ -1,9 +1,9 @@
 import React, {useState} from 'react';
 import axios from 'axios';
+import setCookie from '../../utils/utils';
 
 
-
-const RegisterForm = () => {
+const RegisterForm = ({setUserAuth}) => {
     const initialState = {
         email: '',
         password: '',
@@ -14,9 +14,10 @@ const RegisterForm = () => {
     const [formState, setFormState] = useState(initialState);
     const onSubmitHandler = event => {
         event.preventDefault();
-        console.log(formState);
         axios.post('/users', formState).then(res => {
-            console.log(res)
+            const {data} = res
+            setUserAuth(data);
+            setCookie(data);
         })
     }
     const onChangeHandler = event => {

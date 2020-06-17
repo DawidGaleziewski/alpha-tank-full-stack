@@ -1,14 +1,15 @@
 import React, {useState} from 'react';
 import axios from 'axios';
+import setCookie from '../../utils/utils';
 
 const LoginForm = ({setUserAuth}) => {
+
     const onSubmitHandler = (event) => {
         event.preventDefault();
         axios.post('/users/login', formState).then(res => {
-            const oldCookie = JSON.parse(document.cookie);
-            const newCookie = {...oldCookie,...res.data};
-            setUserAuth(newCookie);
-            document.cookie = JSON.stringify(newCookie); 
+            const {data} = res
+            setUserAuth(data);
+            setCookie(data);
         })
     }
     const onChangeHandler = (event) => {
