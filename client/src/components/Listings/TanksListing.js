@@ -1,12 +1,32 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
+import axios from 'axios';
+import getBearerToken from '../../utils/getBearerToken';
 
-const TanksListing = (tanks) => {
+const TanksListing = ({userAuthState}) => {
+    const [tanksListingState, setTanksListingState] = useState([]);
 
-    return (<ul> 
-        {tanks.map(tank => {
-            <li>Tank</li>
-        })}
-    </ul>)
+    useEffect(()=> {
+        const bearerToken = getBearerToken(userAuthState);
+        axios.get('/tanks', bearerToken).then(res => {
+            setTanksListingState(res.data)
+            console.log(res.data)
+        }).catch(error => {
+            console.log(error)
+        })
+    }, [userAuthState])
+
+
+    return (
+        <ul> 
+            {
+            tanksListingState.map(tank => <li key={tank._id}>
+                    <header>
+                        {tank.name}
+                    </header>
+                </li>)
+            }
+        </ul>
+    )
 }
 
 export default TanksListing

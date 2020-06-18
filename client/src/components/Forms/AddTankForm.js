@@ -1,17 +1,21 @@
 import React, {useState} from 'react';
 import axios from 'axios';
-import setCookie from '../../utils/utils';
+// import setCookie from '../../utils/utils';
+import getBearerToken from '../../utils/getBearerToken';
 
 const AddTankForm = ({setUserAuth, userAuthState})=> {
+
+
+    // console.log(userToken)
     const onSubmitHandler = (event) => {
         event.preventDefault();
-        const config = {
-            headers: { Authorization: `Bearer ${userAuthState.token}` }
-        }
-        axios.post('/tanks', formState,config ).then(res => {
-            const {data} = res
-            setUserAuth(data);
-            setCookie(data);
+        const bearerToken = getBearerToken(userAuthState);
+
+        axios.post('/tanks', formState, bearerToken ).then(res => {
+           
+            console.log(res)
+        }).catch(error => {
+            console.log(error)
         })
     }
     const onChangeHandler = (event) => {
