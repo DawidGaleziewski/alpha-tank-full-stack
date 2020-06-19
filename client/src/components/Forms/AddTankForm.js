@@ -2,17 +2,15 @@ import React, {useState} from 'react';
 import axios from 'axios';
 // import setCookie from '../../utils/utils';
 import getBearerToken from '../../utils/getBearerToken';
+import {BrowserRouter as Router, Route} from 'react-router-dom'
 
 const AddTankForm = ({setUserAuth, userAuthState})=> {
-
 
     // console.log(userToken)
     const onSubmitHandler = (event) => {
         event.preventDefault();
         const bearerToken = getBearerToken(userAuthState);
-
         axios.post('/tanks', formState, bearerToken ).then(res => {
-           
             console.log(res)
         }).catch(error => {
             console.log(error)
