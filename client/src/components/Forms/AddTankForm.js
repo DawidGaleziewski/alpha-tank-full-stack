@@ -2,7 +2,6 @@ import React, {useState} from 'react';
 import axios from 'axios';
 // import setCookie from '../../utils/utils';
 import getBearerToken from '../../utils/getBearerToken';
-import {BrowserRouter as Router, Route} from 'react-router-dom'
 
 const AddTankForm = ({setUserAuth, userAuthState})=> {
 

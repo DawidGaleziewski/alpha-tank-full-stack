@@ -1,9 +1,11 @@
 import React, {useState} from 'react';
-import RegisterForm from './components/Forms/RegisterForm';
-import LoginForm from './components/Forms/LoginForm';
+
 import AddTankForm from './components/Forms/AddTankForm';
 import TankListing from './components/Listings/TanksListing';
-import Tank from './components/Pages/Tank'
+import Tank from './components/Pages/Tank';
+import Login from './components/Pages/Login';
+
+import {BrowserRouter as Router, Route} from 'react-router-dom';
 
 function App() {
   const setUserAuthStateHandler = (userAuthData) => {
@@ -14,8 +16,10 @@ function App() {
 
   return (
     <div className="App">
-      <RegisterForm setUserAuth={setUserAuthStateHandler} />
-      <LoginForm setUserAuth={setUserAuthStateHandler} />
+      <Router>
+        <Route path="/"  render={(setUserAuthStateHandler) => <Login setUserAuthStateHandler />} 
+        />
+      </Router>
       <AddTankForm setUserAuth={setUserAuthStateHandler} userAuthState={userAuthState} />
       <TankListing userAuthState={userAuthState} />
       <Tank userAuthState={userAuthState} tankID={"5eea8a4dfa239327948434aa"}  />
