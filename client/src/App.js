@@ -4,6 +4,7 @@ import MainContainer from './components/MainContainer/MainContainer';
 import Tank from './components/Pages/Tank';
 import Login from './components/Pages/Login';
 import TanksHome from './components/Pages/TanksHome';
+import UserProfile from './components/Pages/UserProfile';
 import About from './components/Pages/About';
 import getBearerToken from './utils/getBearerToken';
 import axios from 'axios';
@@ -12,7 +13,6 @@ import axios from 'axios';
 function App() {
 
   const [userAuthState, setUserAuthState] = useState(null);
-  // started working on user log in state
   const [isUserLoggedIn, setIsUserLoggedIn] = useState(false);
   const setUserAuthStateHandler = (userAuthData) => {
     setUserAuthState(userAuthData);
@@ -22,7 +22,7 @@ function App() {
       const bearerToken = getBearerToken(userAuthState);
       axios.get('/users/me', bearerToken).then(res => {
         const token = bearerToken.headers.Authorization.replace('Bearer ', '');
-        setUserAuthState({...res.data, token});
+        setUserAuthState({data: res.data, token});
         setIsUserLoggedIn(true)
       })
     }
@@ -37,7 +37,8 @@ function App() {
             />
             <Route path="/tanks" exact render={() => <TanksHome setUserAuth={setUserAuthStateHandler} userAuthState={userAuthState} isUserLoggedIn={isUserLoggedIn} />} />
             <Route path="/tanks/:tankID" exact component={Tank}/>
-            <Route path="/about" component={About} />
+            <Route path="/me" exec render={()=> <UserProfile userAuthState={userAuthState} setUserAuthState={setUserAuthState}  isUserLoggedIn={isUserLoggedIn} setIsUserLoggedIn={setIsUserLoggedIn} />} />
+            <Route path="/about" exec component={About} />
           </MainContainer>
         </Router>
     </div>

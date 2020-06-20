@@ -12,6 +12,9 @@ const Header = () => {
                 <li>
                     <Link to={'/tanks'}>My tanks</Link>
                 </li>
+                <li>
+                    <Link to={'/me'}>My Profile</Link>
+                </li>
             </ul>
         </nav>
     </header>

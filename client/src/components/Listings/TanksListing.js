@@ -1,21 +1,8 @@
-import React, {useState, useEffect} from 'react';
-import axios from 'axios';
+import React from 'react';
 import {Link} from 'react-router-dom';
-import getBearerToken from '../../utils/getBearerToken';
 
-const TanksListing = ({userAuthState}) => {
-    const [tanksListingState, setTanksListingState] = useState([]);
 
-    useEffect(()=> {
-        const bearerToken = getBearerToken(userAuthState);
-        axios.get('/tanks', bearerToken).then(res => {
-            setTanksListingState(res.data)
-            console.log(res.data)
-        }).catch(error => {
-            console.log(error)
-        })
-    }, [userAuthState])
-
+const TanksListing = ({tanksListingState}) => {
 
     return (
         <ul> 
