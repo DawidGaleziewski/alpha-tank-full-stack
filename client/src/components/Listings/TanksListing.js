@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import axios from 'axios';
+import {Link} from 'react-router-dom';
 import getBearerToken from '../../utils/getBearerToken';
 
 const TanksListing = ({userAuthState}) => {
@@ -21,7 +22,9 @@ const TanksListing = ({userAuthState}) => {
             {
             tanksListingState.map(tank => <li key={tank._id}>
                     <header>
-                        {tank.name}
+                        <Link to={`/tanks/${tank._id}`} >
+                            {tank.name}
+                        </Link>
                     </header>
                 </li>)
             }

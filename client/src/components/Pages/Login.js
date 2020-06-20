@@ -5,8 +5,8 @@ import LoginForm from '../Forms/LoginForm';
 const Login = ({setUserAuth}) => {
     return (
         <Fragment>
-            <RegisterForm setUserAuthStateHandler />
-            <LoginForm setUserAuthStateHandler />
+            <RegisterForm setUserAuth={setUserAuth} />
+            <LoginForm setUserAuth={setUserAuth} />
         </Fragment>
     )
 }

@@ -1,11 +1,10 @@
 import React, {useState} from 'react';
-
-import AddTankForm from './components/Forms/AddTankForm';
-import TankListing from './components/Listings/TanksListing';
+import {BrowserRouter as Router, Route} from 'react-router-dom';
 import Tank from './components/Pages/Tank';
 import Login from './components/Pages/Login';
+import TanksHome from './components/Pages/TanksHome';
+import About from './components/Pages/About';
 
-import {BrowserRouter as Router, Route} from 'react-router-dom';
 
 function App() {
   const setUserAuthStateHandler = (userAuthData) => {
@@ -17,12 +16,12 @@ function App() {
   return (
     <div className="App">
       <Router>
-        <Route path="/"  render={(setUserAuthStateHandler) => <Login setUserAuthStateHandler />} 
+        <Route path="/" exact render={() => <Login setUserAuth={setUserAuthStateHandler} />} 
         />
+        <Route path="/tanks" exact render={() => <TanksHome setUserAuth={setUserAuthStateHandler} userAuthState={userAuthState} />} />
+        <Route path="/tanks/:tankID" exact component={Tank}/>
+        <Route path="/about" component={About} />
       </Router>
-      <AddTankForm setUserAuth={setUserAuthStateHandler} userAuthState={userAuthState} />
-      <TankListing userAuthState={userAuthState} />
-      <Tank userAuthState={userAuthState} tankID={"5eea8a4dfa239327948434aa"}  />
     </div>
   );
 }

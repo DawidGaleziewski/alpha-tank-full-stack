@@ -6,7 +6,8 @@ import TestsListing from '../Listings/TestsListing';
 import AddTestForm from '../Forms/AddTestForm';
 
 
-const Tank = ({userAuthState, tankID}) => {
+const Tank = ({userAuthState,  match}) => {
+    const {params:{tankID}} = match;
     const [tankState, setTankState] = useState([]);
     const [testsState, setTestsState] = useState([]);
 
@@ -23,8 +24,8 @@ const Tank = ({userAuthState, tankID}) => {
     return (
         <Fragment>
             <h2>{tankState.name}</h2>
-            <TestsListing testsState={testsState} />
             <AddTestForm userAuthState={userAuthState} tankID={tankID} />
+            <TestsListing testsState={testsState} />
         </Fragment>
     )
 }
