@@ -3,15 +3,15 @@ import RegisterForm from '../Forms/RegisterForm';
 import LoginForm from '../Forms/LoginForm';
 import {Redirect} from 'react-router-dom';
 
-const Login = ({setUserAuth, userAuthState}) => {
+const Login = ({setUserAuth, userAuthState, isUserLoggedIn, setIsUserLoggedIn}) => {
 
-    if(true){
+    if(isUserLoggedIn){
         return <Redirect to={'/tanks'} />
     } else {
         return (
             <Fragment>
-                <RegisterForm setUserAuth={setUserAuth} />
-                <LoginForm setUserAuth={setUserAuth} />
+                <RegisterForm setUserAuth={setUserAuth} setIsUserLoggedIn={setIsUserLoggedIn} />
+                <LoginForm setUserAuth={setUserAuth} setIsUserLoggedIn={setIsUserLoggedIn} />
             </Fragment>
         )   
     }

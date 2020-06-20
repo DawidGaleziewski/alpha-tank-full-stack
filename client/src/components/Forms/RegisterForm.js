@@ -3,7 +3,7 @@ import axios from 'axios';
 import setCookie from '../../utils/utils';
 
 
-const RegisterForm = ({setUserAuth}) => {
+const RegisterForm = ({setUserAuth, setIsUserLoggedIn}) => {
     const initialState = {
         email: '',
         password: '',
@@ -17,6 +17,7 @@ const RegisterForm = ({setUserAuth}) => {
         axios.post('/users', formState).then(res => {
             const {data} = res
             setUserAuth(data);
+            setIsUserLoggedIn(true);
             setCookie(data);
         })
     }

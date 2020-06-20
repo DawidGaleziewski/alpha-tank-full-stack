@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import axios from 'axios';
 import setCookie from '../../utils/utils';
 
-const LoginForm = ({setUserAuth}) => {
+const LoginForm = ({setUserAuth, setIsUserLoggedIn}) => {
 
     const onSubmitHandler = (event) => {
         event.preventDefault();
@@ -10,6 +10,7 @@ const LoginForm = ({setUserAuth}) => {
             const {data} = res
             console.log(setUserAuth)
             setUserAuth(data);
+            setIsUserLoggedIn(true);
             setCookie(data);
         })
     }
