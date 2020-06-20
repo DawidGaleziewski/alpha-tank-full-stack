@@ -8,6 +8,7 @@ const LoginForm = ({setUserAuth}) => {
         event.preventDefault();
         axios.post('/users/login', formState).then(res => {
             const {data} = res
+            console.log(setUserAuth)
             setUserAuth(data);
             setCookie(data);
         })
