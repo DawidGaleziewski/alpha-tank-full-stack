@@ -1,6 +1,4 @@
-import React, {Fragment, useEffect} from 'react';
-import axios from 'axios';
-// import getBearerToken from '../../utils/getBearerToken';
+import React, {Fragment} from 'react';
 import {Redirect} from 'react-router-dom';
 
 const UserProfile = ({userAccountInfo, isUserLoggedIn}) => {
