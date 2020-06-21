@@ -22,16 +22,12 @@ const TanksHome = ({isUserLoggedIn, tokenState }) => {
         isUserLoggedIn && populateTanksListing();
     }, [isUserLoggedIn, tokenState])
 
-    if(isUserLoggedIn){
-        return(
-            <Fragment>
-                <AddTankForm tokenState={tokenState} setTanksListingState={setTanksListingState} tanksListingState={tanksListingState}/>
-                <TankListing tanksListingState={tanksListingState} />
-            </Fragment>
-        )
-    } else {
-        return <Redirect to={'/'} />
-    }
+    return (
+        {isUserLoggedIn} ? <Fragment>
+            <AddTankForm tokenState={tokenState} setTanksListingState={setTanksListingState} tanksListingState={tanksListingState}/>
+            <TankListing tanksListingState={tanksListingState} />
+        </Fragment> : <Redirect to={'/'} />
+    )
 
 }
 

@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import axios from 'axios';
-import setCookie from '../../utils/utils';
+import {setCookie} from '../../utils/generalUtils';
 
 
 const RegisterForm = ({ setIsUserLoggedIn, setTokenState}) => {
