@@ -7,6 +7,7 @@ import { getAuthHeader} from '../../utils/tokenUtils';
 
 
 const TanksHome = ({isUserLoggedIn, tokenState }) => {
+
     const [tanksListingState, setTanksListingState] = useState([]);
     const populateTanksListing = async (tokenState) => {
         const authHeader = getAuthHeader(tokenState);
@@ -18,8 +19,8 @@ const TanksHome = ({isUserLoggedIn, tokenState }) => {
         }
     }
     useEffect(()=> {
-        populateTanksListing();
-    }, [])
+        isUserLoggedIn && populateTanksListing();
+    }, [isUserLoggedIn, tokenState])
 
     if(isUserLoggedIn){
         return(
