@@ -6,26 +6,35 @@ import Login from './components/Pages/Login';
 import TanksHome from './components/Pages/TanksHome';
 import UserProfile from './components/Pages/UserProfile';
 import About from './components/Pages/About';
-import getBearerToken from './utils/getBearerToken';
+import { getUserToken, formatAuthorizationHeader, formatBearerToken} from './utils/tokenUtils';
+import {pipe} from './utils/generalUtils';
 import axios from 'axios';
 
 
-function App() {
 
-  const [userAuthState, setUserAuthState] = useState(null);
+function App() {
+  const [tokenState, setTokenState] = useState(null);
+  const [userAccountInfo, setUserAccountInfo] = useState({});
   const [isUserLoggedIn, setIsUserLoggedIn] = useState(false);
-  const setUserAuthStateHandler = (userAuthData) => {
-    setUserAuthState(userAuthData);
-  }
-  useEffect(()=> {
+
+  const loginOnMount = async (isUserLoggedIn, tokenState) => {
     if(!isUserLoggedIn){
-      const bearerToken = getBearerToken(userAuthState);
-      axios.get('/users/me', bearerToken).then(res => {
-        const token = bearerToken.headers.Authorization.replace('Bearer ', '');
-        setUserAuthState({data: res.data, token});
-        setIsUserLoggedIn(true)
-      })
+      const token = getUserToken(tokenState);
+      const authHeader = pipe( formatBearerToken, formatAuthorizationHeader)(token);
+      try{
+        const {data} = await axios.get('/users/me', {headers: authHeader});
+        setTokenState(token);
+        setIsUserLoggedIn(true);
+        setUserAccountInfo(data)
+        // console.log('user info:', data)
+      } catch(error){
+        console.log(error)
+      }
     }
+  }
+
+  useEffect( ()=> {
+    loginOnMount(isUserLoggedIn, tokenState)
   }, [isUserLoggedIn])
 
 
@@ -33,11 +42,11 @@ function App() {
     <div className="App">
         <Router>
           <MainContainer>
-            <Route path="/" exact render={() => <Login setUserAuth={setUserAuthStateHandler} userAuthState={userAuthState} isUserLoggedIn={isUserLoggedIn} setIsUserLoggedIn={setIsUserLoggedIn}/>} 
+            <Route path="/" exact render={() => <Login isUserLoggedIn={isUserLoggedIn} setIsUserLoggedIn={setIsUserLoggedIn} tokenState={tokenState} setTokenState={setTokenState}/>} 
             />
-            <Route path="/tanks" exact render={() => <TanksHome setUserAuth={setUserAuthStateHandler} userAuthState={userAuthState} isUserLoggedIn={isUserLoggedIn} />} />
-            <Route path="/tanks/:tankID" exact component={Tank}/>
-            <Route path="/me" exec render={()=> <UserProfile userAuthState={userAuthState} setUserAuthState={setUserAuthState}  isUserLoggedIn={isUserLoggedIn} setIsUserLoggedIn={setIsUserLoggedIn} />} />
+            <Route path="/tanks" exact render={() => <TanksHome isUserLoggedIn={isUserLoggedIn} tokenState={tokenState} />} />
+            <Route path="/tanks/:tankID" exact component={Tank} tokenState={tokenState}/>
+            <Route path="/me" exec render={()=> <UserProfile userAccountInfo={userAccountInfo}  isUserLoggedIn={isUserLoggedIn} setIsUserLoggedIn={setIsUserLoggedIn} />} />
             <Route path="/about" exec component={About} />
           </MainContainer>
         </Router>

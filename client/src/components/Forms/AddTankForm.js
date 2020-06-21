@@ -1,19 +1,13 @@
 import React, {useState} from 'react';
 import axios from 'axios';
-// import setCookie from '../../utils/utils';
-import getBearerToken from '../../utils/getBearerToken';
+import {getAuthHeader} from '../../utils/tokenUtils';
 
-const AddTankForm = ({setUserAuth, userAuthState, setTanksListingState, tanksListingState})=> {
-
-    // console.log(userToken)
+const AddTankForm = ({tokenState, setTanksListingState, tanksListingState})=> {
     const onSubmitHandler = (event) => {
         event.preventDefault();
-        const bearerToken = getBearerToken(userAuthState);
-        axios.post('/tanks', formState, bearerToken ).then(res => {
-            setUserAuth({...userAuthState});
+        const authHeader = getAuthHeader(tokenState);
+        axios.post('/tanks', formState, {headers: authHeader}).then(res => {
             setTanksListingState([...tanksListingState, res.data])
-            console.log('user auth state:', res)
-            // console.log(res)
         }).catch(error => {
             console.log(error)
         })

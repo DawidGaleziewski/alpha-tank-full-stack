@@ -1,8 +1,8 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState} from 'react';
 import axios from 'axios';
-import getBearerToken from '../../utils/getBearerToken';
+import {getAuthHeader} from '../../utils/tokenUtils';
 
-const AddTestForm = ({userAuthState, tankID})=> {
+const AddTestForm = ({tokenState, tankID, setTestsState, testsState})=> {
     const initialState = {
         dateOfTest: '',
         nh3: '',
@@ -13,15 +13,15 @@ const AddTestForm = ({userAuthState, tankID})=> {
     }
     const [formState, setFormState] = useState(initialState)
 
-    const onSubmitHandler = (event) => {
+    const onSubmitHandler = async (event) => {
         event.preventDefault();
-        const bearerToken = getBearerToken(userAuthState);
-        console.log({...formState, tankID})
-        axios.post('/tests', {...formState, tankID}, bearerToken ).then(res => {
-            console.log(res)
-        }).catch(error => {
+        const authHeader = getAuthHeader(tokenState);
+        try {
+            const {data} = await axios.post('/tests', {...formState, tankID}, {headers: authHeader} );
+            setTestsState([...testsState, data])
+        } catch(error){
             console.log(error)
-        })
+        }
     };
     const onChangeHandler = (event) => {
         const value = event.target.type === "checkbox" ? event.target.checked : event.target.value;

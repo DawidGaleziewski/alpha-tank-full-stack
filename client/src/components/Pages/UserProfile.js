@@ -1,26 +1,14 @@
 import React, {Fragment, useEffect} from 'react';
 import axios from 'axios';
-import getBearerToken from '../../utils/getBearerToken';
+// import getBearerToken from '../../utils/getBearerToken';
 import {Redirect} from 'react-router-dom';
 
-const UserProfile = ({userAuthState, setUserAuthState, isUserLoggedIn, setIsUserLoggedIn}) => {
+const UserProfile = ({userAccountInfo, isUserLoggedIn}) => {
 
-    useEffect(()=> {
-        if(!isUserLoggedIn){
-          const bearerToken = getBearerToken(userAuthState);
-          axios.get('/users/me', bearerToken).then(res => {
-            const token = bearerToken.headers.Authorization.replace('Bearer ', '');
-            setUserAuthState({data: res.data, token});
-            setIsUserLoggedIn(true);
-            console.log('user auth state is', userAuthState)
-          })
-        }
-      }, [isUserLoggedIn, userAuthState])
-
-    // console.log(userAuthState)
+    console.log('profile ingfo is:', userAccountInfo)
    
     if(isUserLoggedIn){
-         const {name, email, surname, age, date} = userAuthState.data;
+         const {name, email, surname, age, date} = userAccountInfo;
         return (
             <Fragment>
                 <h2>Hello {name}</h2>

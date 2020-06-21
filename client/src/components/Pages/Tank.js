@@ -1,30 +1,31 @@
 import React, {Fragment ,useState, useEffect} from 'react';
 import axios from 'axios';
-import getBearerToken from '../../utils/getBearerToken';
-
 import TestsListing from '../Listings/TestsListing';
 import AddTestForm from '../Forms/AddTestForm';
+import {getAuthHeader} from '../../utils/tokenUtils';
 
 
-const Tank = ({userAuthState,  match}) => {
+const Tank = ({tokenState,  match}) => {
     const {params:{tankID}} = match;
     const [tankState, setTankState] = useState([]);
     const [testsState, setTestsState] = useState([]);
 
+    const populateTankAndTestsInformation = async (tokenState, tankID) => {
+        const authHeader = getAuthHeader(tokenState);
+        const {data:{tank, tests}} = await axios.get(`/tanks/${tankID}`, {headers: authHeader} )
+        console.log(tests)
+        setTankState(tank);
+        setTestsState(tests);
+    }
+
     useEffect(()=> {
-        const bearerToken = getBearerToken(userAuthState);
-        axios.get(`/tanks/${tankID}`, bearerToken ).then(res => {
-            const {tank, tests} = res.data;
-            console.log(tests)
-            setTankState(tank);
-            setTestsState(tests);
-        })
-    }, [userAuthState, tankID])
+        populateTankAndTestsInformation(tokenState, tankID)
+    }, [tokenState, tankID])
 
     return (
         <Fragment>
             <h2>{tankState.name}</h2>
-            <AddTestForm userAuthState={userAuthState} tankID={tankID} />
+            <AddTestForm tankID={tankID} tokenState={tokenState} testsState={testsState} setTestsState={setTestsState} />
             <TestsListing testsState={testsState} />
         </Fragment>
     )
