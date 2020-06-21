@@ -1,7 +1,8 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
+import LogoutButton from '../atoms/LogoutButton/LogoutButton';
 
-const Header = () => {
+const Header = ({setIsUserLoggedIn, setTokenState}) => {
 
     return <header>
         <nav>
@@ -14,6 +15,9 @@ const Header = () => {
                 </li>
                 <li>
                     <Link to={'/me'}>My Profile</Link>
+                </li>
+                <li>
+                    <LogoutButton btnText={'Logout'} setIsUserLoggedIn={setIsUserLoggedIn} setTokenState={setTokenState} />
                 </li>
             </ul>
         </nav>

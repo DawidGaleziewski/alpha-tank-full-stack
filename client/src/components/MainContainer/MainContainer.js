@@ -1,11 +1,11 @@
 import React, {Fragment} from 'react';
 import Header from '../Header/Header';
 
-const MainContainer = ({children})=> {
+const MainContainer = ({setIsUserLoggedIn, children, setTokenState})=> {
 
     return (
         <Fragment>
-            <Header />
+            <Header setIsUserLoggedIn={setIsUserLoggedIn} setTokenState={setTokenState} />
             {children}
         </Fragment>
     )

@@ -1,8 +1,11 @@
-import React, {Fragment, useState, useEffect, useRef} from 'react';
+// Libs
+import React, {Fragment, useState, useEffect} from 'react';
 import {Redirect} from 'react-router-dom';
+import axios from 'axios';
+// Components
 import AddTankForm from '../Forms/AddTankForm';
 import TankListing from '../Listings/TanksListing';
-import axios from 'axios';
+// Utils
 import { getAuthHeader} from '../../utils/tokenUtils';
 
 
@@ -22,12 +25,17 @@ const TanksHome = ({isUserLoggedIn, tokenState }) => {
         isUserLoggedIn && populateTanksListing();
     }, [isUserLoggedIn, tokenState])
 
-    return (
-        {isUserLoggedIn} ? <Fragment>
-            <AddTankForm tokenState={tokenState} setTanksListingState={setTanksListingState} tanksListingState={tanksListingState}/>
-            <TankListing tanksListingState={tanksListingState} />
-        </Fragment> : <Redirect to={'/'} />
-    )
+    if(isUserLoggedIn){
+        return (
+             <Fragment>
+                <AddTankForm tokenState={tokenState} setTanksListingState={setTanksListingState} tanksListingState={tanksListingState}/>
+                <TankListing tanksListingState={tanksListingState} />
+            </Fragment>
+        )
+    } else {
+       return  <Redirect to={'/'} />
+    }
+
 
 }
 

@@ -1,7 +1,7 @@
 const pipe = (...fns) => (x) => fns.reduce((v, f) => f(v), x);
 
 const setCookie = (data) => {
-    let newCookieObj = '';
+    let newCookieObj = {};
     try {
         newCookieObj = document.cookie.length > 0 ? {...JSON.parse(document.cookie), ...data} : {...data};
         document.cookie = JSON.stringify(newCookieObj);
@@ -11,7 +11,16 @@ const setCookie = (data) => {
     return newCookieObj; 
 }
 
+const deleteFromCookie = (key) => {
+    const cookie = JSON.parse(document.cookie);
+
+    delete cookie[key];
+    console.log(cookie)
+    document.cookie = JSON.stringify(cookie)
+}
+
 export {
     pipe,
-    setCookie
+    setCookie,
+    deleteFromCookie
 }

@@ -1,5 +1,8 @@
+// Libs
 import React, {useState} from 'react';
 import axios from 'axios';
+// Components
+// Utils
 import {setCookie} from '../../utils/generalUtils';
 
 const LoginForm = ({setTokenState, setIsUserLoggedIn}) => {
