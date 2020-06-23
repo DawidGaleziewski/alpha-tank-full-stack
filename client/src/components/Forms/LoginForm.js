@@ -4,6 +4,7 @@ import axios from 'axios';
 // Components
 // Utils
 import {setCookie} from '../../utils/generalUtils';
+import InputSlider from '../atoms/Inputs/InputSlider';
 
 const LoginForm = ({setTokenState, setIsUserLoggedIn}) => {
     const onSubmitHandler = (event) => {

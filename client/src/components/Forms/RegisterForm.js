@@ -4,6 +4,7 @@ import axios from 'axios';
 // Components
 // Utils
 import {setCookie} from '../../utils/generalUtils';
+import InputSlider from '../atoms/Inputs/InputSlider';
 
 
 const RegisterForm = ({ setIsUserLoggedIn, setTokenState}) => {
@@ -34,6 +35,7 @@ const RegisterForm = ({ setIsUserLoggedIn, setTokenState}) => {
 
     return (
         <form onSubmit={onSubmitHandler}>
+             <InputSlider />
             <input name="email" onChange={onChangeHandler} value={formState.email} type="email" placeholder="email"/>
             <input name="password" onChange={onChangeHandler} type="password" placeholder="password" />
             <input name="name" onChange={onChangeHandler} type="text" placeholder="name" />

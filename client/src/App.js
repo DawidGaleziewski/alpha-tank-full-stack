@@ -1,7 +1,12 @@
+// Styles
+import './css/globalStyles.css';
+
 // Libs
 import React, {useState, useEffect} from 'react';
 import {BrowserRouter as Router, Route} from 'react-router-dom';
 import axios from 'axios';
+import {Global, css} from '@emotion/core';
+
 // Components
 import MainContainer from './components/MainContainer/MainContainer';
 import Tank from './components/Pages/Tank';
@@ -39,18 +44,21 @@ function App() {
   }, [isUserLoggedIn])
 
 
+  // const globalStyles= css`
+  //   background-color: #fefefe;
+  // `;
   return (
     <div className="App">
-        <Router>
-          <MainContainer setIsUserLoggedIn={setIsUserLoggedIn} setTokenState={setTokenState}>
-            <Route path="/" exact render={() => <Login isUserLoggedIn={isUserLoggedIn} setIsUserLoggedIn={setIsUserLoggedIn} tokenState={tokenState} setTokenState={setTokenState}/>} 
-            />
-            <Route path="/tanks" exact render={() => <TanksHome isUserLoggedIn={isUserLoggedIn} tokenState={tokenState} />} />
-            <Route path="/tanks/:tankID" exact component={Tank} tokenState={tokenState}/>
-            <Route path="/me" exec render={()=> <UserProfile userAccountInfo={userAccountInfo}  isUserLoggedIn={isUserLoggedIn} setIsUserLoggedIn={setIsUserLoggedIn} />} />
-            <Route path="/about" exec component={About} />
-          </MainContainer>
-        </Router>
+          <Router>
+            <MainContainer setIsUserLoggedIn={setIsUserLoggedIn} setTokenState={setTokenState}>
+              <Route path="/" exact render={() => <Login isUserLoggedIn={isUserLoggedIn} setIsUserLoggedIn={setIsUserLoggedIn} tokenState={tokenState} setTokenState={setTokenState}/>} 
+              />
+              <Route path="/tanks" exact render={() => <TanksHome isUserLoggedIn={isUserLoggedIn} tokenState={tokenState} />} />
+              <Route path="/tanks/:tankID" exact component={Tank} tokenState={tokenState}/>
+              <Route path="/me" exec render={()=> <UserProfile userAccountInfo={userAccountInfo}  isUserLoggedIn={isUserLoggedIn} setIsUserLoggedIn={setIsUserLoggedIn} />} />
+              <Route path="/about" exec component={About} />
+            </MainContainer>
+          </Router>
     </div>
   );
 }
