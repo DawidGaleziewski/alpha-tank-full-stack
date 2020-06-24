@@ -8,7 +8,7 @@ const tankCardStyle = css`
   background-color: #fff;
   border-radius: 16px;
   list-style: none;
-  box-shadow: -1px 1px 8px 10px rgba(240, 243, 248, 1);
+  box-shadow: -1px 1px 21px 10px rgba(240, 243, 248, 1);
   margin-bottom: 2rem;
   & .card-header {
     color: #7e84cc;
