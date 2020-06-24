@@ -7,20 +7,11 @@ import InputSlider from "../atoms/inputs/InputSlider";
 import FormButton from "../atoms/buttons/FormButton";
 // Utils
 import { setCookie } from "../../utils/generalUtils";
+// Styles
+import formDefaultStyle from "./styles/formDefaultStyle";
 
 /** @jsx jsx */
 
-const formStyle = css`
-  background-color: #fff;
-  padding: 4rem;
-  display: inline-block;
-  border-radius: 16px;
-
-  & > .input-slider-wrapper {
-    display: block;
-    margin-bottom: 1.6rem;
-  }
-`;
 const RegisterForm = ({ setIsUserLoggedIn, setTokenState }) => {
   const initialState = {
     email: "",
@@ -53,7 +44,7 @@ const RegisterForm = ({ setIsUserLoggedIn, setTokenState }) => {
   };
 
   return (
-    <form css={formStyle} onSubmit={onSubmitHandler}>
+    <form css={formDefaultStyle} onSubmit={onSubmitHandler}>
       <InputSlider
         id={"registerEmail"}
         type={"email"}

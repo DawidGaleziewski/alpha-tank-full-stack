@@ -4,10 +4,11 @@ import { css, jsx } from "@emotion/core";
 
 const inputWrapperStyle = css`
   position: relative;
-  display: inline-block;
+  display: block;
 `;
 
 const inputStyle = css`
+  width: 100%;
   padding: 0.8rem;
   border: none;
   border-bottom: 1px solid #92a2ae;
