@@ -22,15 +22,15 @@ const inputStyle = css`
 
 const labelStyle = ({ isValueFilled }) => css`
   position: absolute;
-  left: 50%;
+  left: 0.8rem;
   top: 50%;
   font-size: 1.6rem;
   transform: ${isValueFilled
-    ? "translate(-50%, -150%) scale(0.8)"
-    : "translate(-50%, -50%)"};
+    ? "translate(-10%, -170%) scale(0.8)"
+    : "translate(0, -50%)"};
   color: #92a2ae;
   input:focus + & {
-    transform: translate(-50%, -150%) scale(0.8);
+    transform: translate(-10%, -170%) scale(0.8);
     color: #5a95e6;
   }
   transition: all ease-in 0.3s;
