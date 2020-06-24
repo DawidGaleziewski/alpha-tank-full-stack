@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { css, jsx } from "@emotion/core";
 /** @jsx jsx */
 
@@ -32,28 +32,24 @@ const labelStyle = ({ isValueFilled }) => css`
     color: #5a95e6;
   }
   transition: all ease-in 0.3s;
+  pointer-events: none;
 `;
 
-const InputSlider = () => {
-  const [isValueFilled, setIsValueFilled] = useState(false);
-
-  const onChangeHandler = (event) => {
-    setIsValueFilled(event.target.value.length > 0);
-    console.log(isValueFilled);
-  };
+const InputSlider = ({ id, type, name, labelText, value, onChange }) => {
+  const isValueFilled = value.length > 0;
 
   return (
     <div css={inputWrapperStyle}>
       <input
-        onChange={onChangeHandler}
+        onChange={onChange}
         css={inputStyle}
-        id="test"
-        type="text"
-        name="test"
-        min="1"
+        id={id}
+        type={type}
+        name={name}
+        value={value}
       />
-      <label css={labelStyle({ isValueFilled })} htmlFor="test">
-        Test input
+      <label css={labelStyle({ isValueFilled })} htmlFor={id}>
+        {labelText}
       </label>
     </div>
   );
