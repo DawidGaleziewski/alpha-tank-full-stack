@@ -1,22 +1,31 @@
-import React from 'react';
-import {Link} from 'react-router-dom';
+import React from "react";
+import { Link } from "react-router-dom";
+import { css, jsx } from "@emotion/core";
+// Components
+import TankCard from "../atoms/cards/TankCard";
 
+/** @jsx jsx */
 
-const TanksListing = ({tanksListingState}) => {
+const tanksListingStyle = css`
+  padding: 2rem 4rem;
+  background-color: #fff;
+  border-radius: 16px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  & > .tank-card {
+    flex-basis: calc(50% - 2rem);
+  }
+`;
 
-    return (
-        <ul> 
-            {
-            tanksListingState.map(tank => <li key={tank._id}>
-                    <header>
-                        <Link to={`/tanks/${tank._id}`} >
-                            {tank.name}
-                        </Link>
-                    </header>
-                </li>)
-            }
-        </ul>
-    )
-}
+const TanksListing = ({ tanksListingState }) => {
+  return (
+    <ul css={tanksListingStyle}>
+      {tanksListingState.map((tank) => (
+        <TankCard key={tank._id} tankData={tank} />
+      ))}
+    </ul>
+  );
+};
 
-export default TanksListing
+export default TanksListing;

@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import axios from "axios";
 import { css, jsx } from "@emotion/core";
 // Components
-import InputSlider from "../atoms/inputs/InputSlider";
+import InputSlider from "../atoms/Inputs/InputSlider";
 import FormButton from "../atoms/buttons/FormButton";
 // Utils
 import { setCookie } from "../../utils/generalUtils";

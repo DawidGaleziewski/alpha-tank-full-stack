@@ -21,6 +21,7 @@ import { pipe } from "./utils/generalUtils";
 
 /** @jsx jsx */
 const globalStyles = css`
+  @import url("https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap");
   *,
   *::after,
   *::before {
@@ -30,6 +31,7 @@ const globalStyles = css`
     font-size: 10px;
   }
   body {
+    font-family: "Roboto", sans-serif;
     font-size: 16px;
     background-color: #f0f3f8;
     margin: 0;

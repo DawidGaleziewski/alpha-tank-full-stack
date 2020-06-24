@@ -1,48 +1,100 @@
 // Libs
-import React, {useState} from 'react';
-import axios from 'axios';
+import React, { useState } from "react";
+import axios from "axios";
+import { css, jsx } from "@emotion/core";
 // Components
+import InputSlider from "../atoms/Inputs/InputSlider";
+import FormButton from "../atoms/buttons/FormButton";
 // Utils
-import {getAuthHeader} from '../../utils/tokenUtils';
+import { getAuthHeader } from "../../utils/tokenUtils";
+// Styles
+import barFormStyle from "./styles/barFormStyle";
 
-const AddTankForm = ({tokenState, setTanksListingState, tanksListingState})=> {
-    const onSubmitHandler = (event) => {
-        event.preventDefault();
-        const authHeader = getAuthHeader(tokenState);
-        axios.post('/tanks', formState, {headers: authHeader}).then(res => {
-            setTanksListingState([...tanksListingState, res.data])
-        }).catch(error => {
-            console.log(error)
-        })
-    }
-    const onChangeHandler = (event) => {
-        const {target:{value, name}} = event;
-        setFormState({
-            ...formState,
-            [name] : value 
-        })
-    }
+/** @jsx jsx */
 
-    const initialState = {
-        name: '',
-        sizeX: '',
-        sizeY: '',
-        sizeZ: '',
-        aquariumType: ''
-    }
+const AddTankForm = ({
+  tokenState,
+  setTanksListingState,
+  tanksListingState,
+}) => {
+  const onSubmitHandler = (event) => {
+    event.preventDefault();
+    const authHeader = getAuthHeader(tokenState);
+    axios
+      .post("/tanks", formState, { headers: authHeader })
+      .then((res) => {
+        setTanksListingState([...tanksListingState, res.data]);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+  const onChangeHandler = (event) => {
+    const {
+      target: { value, name },
+    } = event;
+    setFormState({
+      ...formState,
+      [name]: value,
+    });
+  };
 
-    const [formState, setFormState] = useState(initialState);
+  const initialState = {
+    name: "",
+    sizeX: "",
+    sizeY: "",
+    sizeZ: "",
+    aquariumType: "",
+  };
 
-    return (
-        <form onSubmit={onSubmitHandler}>
-            <input onChange={onChangeHandler} name="name" type="text" placeholder="tank name"/>
-            <input onChange={onChangeHandler} name="sizeX" type="number" placeholder="Size on the X axis"/>
-            <input onChange={onChangeHandler} name="sizeY" type="number" placeholder="Size on the Y axis"/>
-            <input onChange={onChangeHandler} name="sizeZ" type="number" placeholder="Size on the Z axis"/>
-            <input onChange={onChangeHandler} name="aquariumType" type="text" placeholder="aquarium type"/>
-            <input type="submit" value="Add tank" />
-        </form>
-    )
-}
+  const [formState, setFormState] = useState(initialState);
+
+  return (
+    <form css={barFormStyle} onSubmit={onSubmitHandler}>
+      <InputSlider
+        id={"tankName"}
+        type={"text"}
+        name={"name"}
+        labelText={"tank name"}
+        value={formState.name}
+        onChange={onChangeHandler}
+      />
+      <InputSlider
+        id={"TankSizeX"}
+        type={"number"}
+        name={"sizeX"}
+        labelText={"tank size on X axis"}
+        value={formState.sizeX}
+        onChange={onChangeHandler}
+      />
+      <InputSlider
+        id={"TankSizeY"}
+        type={"number"}
+        name={"sizeY"}
+        labelText={"tank size on Y axis"}
+        value={formState.sizeY}
+        onChange={onChangeHandler}
+      />
+      <InputSlider
+        id={"TankSizeZ"}
+        type={"number"}
+        name={"sizeZ"}
+        labelText={"tank size on Z axis"}
+        value={formState.sizeZ}
+        onChange={onChangeHandler}
+      />
+      <InputSlider
+        id={"tankAquariumType"}
+        type={"text"}
+        name={"aquariumType"}
+        labelText={"aquarium type"}
+        value={formState.sizeZ}
+        onChange={onChangeHandler}
+      />
+
+      <FormButton btnText="Add tank" />
+    </form>
+  );
+};
 
 export default AddTankForm;

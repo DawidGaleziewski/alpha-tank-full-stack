@@ -27,6 +27,10 @@ const navbarStyle = css`
       margin-left: auto;
     }
   }
+
+  & .logout-button {
+    margin-top: 1.3rem;
+  }
 `;
 
 const linkStyle = css`
@@ -60,7 +64,7 @@ const Header = ({ setIsUserLoggedIn, setTokenState }) => {
           </li>
           <li>
             <Link css={linkStyle} to={"/me"}>
-              my Profile
+              my profile
             </Link>
           </li>
           <li>
