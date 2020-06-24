@@ -3,6 +3,7 @@ import { css, jsx } from "@emotion/core";
 /** @jsx jsx */
 
 const inputWrapperStyle = css`
+  width: 100%;
   position: relative;
   display: block;
 `;
@@ -13,6 +14,7 @@ const inputStyle = css`
   border: none;
   border-bottom: 1px solid #92a2ae;
   outline: none;
+  display: block;
   &:focus {
     border-bottom: 1px solid #5a95e6;
   }

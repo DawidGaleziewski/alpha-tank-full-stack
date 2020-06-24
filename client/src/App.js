@@ -21,12 +21,25 @@ import { pipe } from "./utils/generalUtils";
 
 /** @jsx jsx */
 const globalStyles = css`
+  *,
+  *::after,
+  *::before {
+    box-sizing: border-box;
+  }
   html {
     font-size: 10px;
   }
   body {
     font-size: 16px;
-    background-color: #4b77b5;
+    background-color: #f0f3f8;
+    margin: 0;
+    padding: 0;
+  }
+  ul,
+  li,
+  ol {
+    margin: 0;
+    padding-inline-start: 0;
   }
 `;
 
