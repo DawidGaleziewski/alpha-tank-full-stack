@@ -5,7 +5,6 @@ import { css, jsx } from "@emotion/core";
 const inputWrapperStyle = css`
   position: relative;
   display: inline-block;
-  margin-bottom: 1rem;
 `;
 
 const inputStyle = css`
@@ -39,7 +38,7 @@ const InputSlider = ({ id, type, name, labelText, value, onChange }) => {
   const isValueFilled = value.length > 0;
 
   return (
-    <div css={inputWrapperStyle}>
+    <div className="input-slider-wrapper" css={inputWrapperStyle}>
       <input
         onChange={onChange}
         css={inputStyle}

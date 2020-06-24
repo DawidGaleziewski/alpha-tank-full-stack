@@ -26,6 +26,7 @@ const globalStyles = css`
   }
   body {
     font-size: 16px;
+    background-color: #4b77b5;
   }
 `;
 

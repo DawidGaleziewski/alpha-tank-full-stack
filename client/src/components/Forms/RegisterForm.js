@@ -1,11 +1,26 @@
 // Libs
 import React, { useState } from "react";
 import axios from "axios";
+import { css, jsx } from "@emotion/core";
 // Components
+import InputSlider from "../atoms/inputs/InputSlider";
+import FormButton from "../atoms/buttons/FormButton";
 // Utils
 import { setCookie } from "../../utils/generalUtils";
-import InputSlider from "../atoms/Inputs/InputSlider";
 
+/** @jsx jsx */
+
+const formStyle = css`
+  background-color: #fff;
+  padding: 4rem;
+  display: inline-block;
+  border-radius: 16px;
+
+  & > .input-slider-wrapper {
+    display: block;
+    margin-bottom: 1.6rem;
+  }
+`;
 const RegisterForm = ({ setIsUserLoggedIn, setTokenState }) => {
   const initialState = {
     email: "",
@@ -38,7 +53,7 @@ const RegisterForm = ({ setIsUserLoggedIn, setTokenState }) => {
   };
 
   return (
-    <form onSubmit={onSubmitHandler}>
+    <form css={formStyle} onSubmit={onSubmitHandler}>
       <InputSlider
         id={"registerEmail"}
         type={"email"}
@@ -51,7 +66,7 @@ const RegisterForm = ({ setIsUserLoggedIn, setTokenState }) => {
         id={"registerPassword"}
         type={"password"}
         name={"password"}
-        labelText={"password"}
+        labelText={"Password"}
         value={formState.password}
         onChange={onChangeHandler}
       />
@@ -80,7 +95,8 @@ const RegisterForm = ({ setIsUserLoggedIn, setTokenState }) => {
         onChange={onChangeHandler}
       />
 
-      <input type="submit" value="register" />
+      <FormButton btnText="register" />
+      {/* <input type="submit" value="register" /> */}
     </form>
   );
 };
