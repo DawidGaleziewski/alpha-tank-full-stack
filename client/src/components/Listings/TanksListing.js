@@ -9,7 +9,7 @@ import TankCard from "../atoms/cards/TankCard";
 const tanksListingStyle = css`
   padding: 2rem 4rem;
   background-color: #fff;
-  border-radius: 16px;
+  border-radius: 0 0 16px 16px;
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
