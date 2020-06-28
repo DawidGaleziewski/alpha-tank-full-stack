@@ -16,6 +16,10 @@ const tanksListingStyle = css`
   & > .tank-card {
     flex-basis: calc(50% - 2rem);
   }
+
+  @media screen and (max-width: 768px) {
+    display: block;
+  }
 `;
 
 const TanksListing = ({ tanksListingState }) => {
