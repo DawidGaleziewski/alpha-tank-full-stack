@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { css, jsx } from "@emotion/core";
 // Componets
@@ -9,27 +9,8 @@ import LogoutButton from "../atoms/LogoutButton/LogoutButton";
 const headerStyle = css`
   margin-top: 4rem;
   margin-bottom: 4rem;
-`;
-
-const navbarStyle = css`
-  background-color: #fff;
-  max-width: 1170px;
-  margin-left: auto;
-  margin-right: auto;
-  /* padding: 2rem; */
-  border-radius: 16px;
-  padding: 0 2rem;
-
-  & > ul {
-    list-style: none;
-    display: flex;
-    & > li:last-of-type {
-      margin-left: auto;
-    }
-  }
-
-  & .logout-button {
-    margin-top: 1.3rem;
+  @media screen and (max-width: 768px) {
+    margin-top: 0;
   }
 `;
 
@@ -45,12 +26,80 @@ const linkStyle = css`
   &:hover {
     border-bottom-color: #b0b3df;
   }
+
+  @media screen and (max-width: 768px) {
+    display: inline-block;
+  }
+`;
+
+const toggleBtnStyle = css`
+  position: absolute;
+  top: 2rem;
+  right: 4rem;
+  height: 5rem;
+  width: 5rem;
+  font-size: 0;
+  color: rgba(0, 0, 0, 0);
+  display: none;
+  border-radius: 50px;
+  border: 1px solid #000;
+  background-color: #fff;
+  @media screen and (max-width: 768px) {
+    display: block;
+  }
 `;
 
 const Header = ({ setIsUserLoggedIn, setTokenState }) => {
+  const [isNavToggled, setIsNavToggled] = useState(false);
+  const onToggleHandler = () => {
+    setIsNavToggled(!isNavToggled);
+    console.log(isNavToggled);
+  };
+
+  const navbarStyle = css`
+    background-color: #fff;
+    max-width: 1170px;
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 16px;
+    padding: 0 2rem;
+
+    @media screen and (max-width: 768px) {
+      padding-top: 4rem;
+      /* background-color: rgba(0,0,0,0); */
+      background-color: ${isNavToggled ? "#ffffff" : "rgba(0,0,0,0);"};
+    }
+
+    & > ul {
+      list-style: none;
+      display: flex;
+      & > li:last-of-type {
+        margin-left: auto;
+      }
+      @media screen and (max-width: 768px) {
+        display: ${isNavToggled ? "flex" : "none"};
+        flex-direction: column;
+        padding: 2rem;
+        justify-content: right;
+
+        & > li {
+          display: inline-block;
+          text-align: right;
+        }
+      }
+    }
+
+    & .logout-button {
+      margin-top: 1.3rem;
+    }
+  `;
+
   return (
     <header css={headerStyle}>
       <nav css={navbarStyle}>
+        <button onClick={onToggleHandler} css={toggleBtnStyle}>
+          Toggle
+        </button>
         <ul>
           <li>
             <Link css={linkStyle} to={"/"}>

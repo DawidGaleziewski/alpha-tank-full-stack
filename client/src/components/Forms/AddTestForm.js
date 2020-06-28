@@ -91,7 +91,7 @@ const AddTestForm = ({ tokenState, tankID, setTestsState, testsState }) => {
         id={"tempCelc"}
         type={"number"}
         name={"tempCelc"}
-        labelText={"temperature in celc"}
+        labelText={"temperature C"}
         value={formState.tempCelc}
         onChange={onChangeHandler}
       />

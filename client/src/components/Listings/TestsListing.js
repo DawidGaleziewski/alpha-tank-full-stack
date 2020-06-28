@@ -8,8 +8,9 @@ const tableStyle = css`
   font-size: 1.6rem;
   text-align: left;
   background-color: #fff;
-  padding: 2rem 4rem;
+  /* padding: 2rem 4rem; */
   border-collapse: collapse;
+  /* border-radius: 16px; */
 
   & thead tr {
     font-weight: 700;
