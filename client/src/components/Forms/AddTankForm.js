@@ -5,6 +5,7 @@ import { css, jsx } from "@emotion/core";
 // Components
 import InputSlider from "../atoms/inputs/InputSlider";
 import FormButton from "../atoms/buttons/FormButton";
+import CloseWindowButton from "../atoms/buttons/CloseWindowButton";
 // Utils
 import { getAuthHeader } from "../../utils/tokenUtils";
 // Styles
@@ -51,6 +52,7 @@ const AddTankForm = ({
 
   return (
     <form css={barFormStyle} onSubmit={onSubmitHandler}>
+      <CloseWindowButton />
       <InputSlider
         id={"tankName"}
         type={"text"}
