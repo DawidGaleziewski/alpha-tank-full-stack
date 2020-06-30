@@ -3,8 +3,8 @@ import React, { useState } from "react";
 import axios from "axios";
 import { css, jsx } from "@emotion/core";
 // Components
-import InputSlider from "../atoms/Inputs/InputSlider";
-import DatePicker from "../atoms/Inputs/DatePicker";
+import InputSlider from "../atoms/inputs/InputSlider";
+import DatePicker from "../atoms/inputs/DatePicker";
 import FormButton from "../atoms/buttons/FormButton";
 // Utils
 import { getAuthHeader } from "../../utils/tokenUtils";
