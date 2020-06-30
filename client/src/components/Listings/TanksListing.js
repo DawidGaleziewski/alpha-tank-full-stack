@@ -7,14 +7,18 @@ import TankCard from "../atoms/cards/TankCard";
 /** @jsx jsx */
 
 const tanksListingStyle = css`
-  padding: 2rem 4rem;
-  background-color: #fff;
-  border-radius: 16px;
+  /* padding: 2rem 4rem; */
+  /* background-color: #fff; */
+  /* border-radius: 0 0 16px 16px; */
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
   & > .tank-card {
     flex-basis: calc(50% - 2rem);
+  }
+
+  @media screen and (max-width: 768px) {
+    display: block;
   }
 `;
 
