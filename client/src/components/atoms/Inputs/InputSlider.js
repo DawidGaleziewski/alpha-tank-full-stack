@@ -20,26 +20,21 @@ const inputStyle = css`
   }
 `;
 
-const labelStyle = ({ isValueFilled }) => css`
-  position: absolute;
-  left: 0.8rem;
-  top: 50%;
-  font-size: 1.6rem;
-  transform: ${isValueFilled
-    ? "translate(-10%, -170%) scale(0.8)"
-    : "translate(0, -50%)"};
-  color: #92a2ae;
-  input:focus + & {
-    transform: translate(-10%, -170%) scale(0.8);
-    color: #5a95e6;
-  }
-  transition: all ease-in 0.3s;
-  pointer-events: none;
-`;
-
 const InputSlider = ({ id, type, name, labelText, value, onChange }) => {
-  const isValueFilled = value.length > 0;
+  const labelStyle = css`
+    position: absolute;
+    left: 0.8rem;
+    top: 50%;
+    font-size: 1.6rem;
+    color: #92a2ae;
+    transform: translate(-10%, -170%) scale(0.8);
 
+    input:placeholder-shown + & {
+      transform: translate(0, -50%);
+    }
+    transition: all ease-in 0.3s;
+    pointer-events: none;
+  `;
   return (
     <div className="input-slider-wrapper" css={inputWrapperStyle}>
       <input
@@ -49,8 +44,9 @@ const InputSlider = ({ id, type, name, labelText, value, onChange }) => {
         type={type}
         name={name}
         value={value}
+        placeholder=" "
       />
-      <label css={labelStyle({ isValueFilled })} htmlFor={id}>
+      <label css={labelStyle} htmlFor={id}>
         {labelText}
       </label>
     </div>
