@@ -37,7 +37,15 @@ const labelStyle = ({ isValueFilled }) => css`
   pointer-events: none;
 `;
 
-const InputSlider = ({ id, type, name, labelText, value, onChange }) => {
+const InputSlider = ({
+  id,
+  type,
+  name,
+  labelText,
+  value,
+  onChange,
+  autoFocus,
+}) => {
   const isValueFilled = value.length > 0;
 
   return (
@@ -49,6 +57,7 @@ const InputSlider = ({ id, type, name, labelText, value, onChange }) => {
         type={type}
         name={name}
         value={value}
+        autoFocus={autoFocus}
       />
       <label css={labelStyle({ isValueFilled })} htmlFor={id}>
         {labelText}

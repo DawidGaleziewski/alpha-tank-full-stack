@@ -41,9 +41,12 @@ const toggleBtnStyle = css`
   font-size: 0;
   color: rgba(0, 0, 0, 0);
   display: none;
-  border-radius: 50px;
+  border-radius: 16px;
   border: 1px solid #000;
   background-color: #fff;
+  &:after {
+    position: absolute;
+  }
   @media screen and (max-width: 768px) {
     display: block;
   }
@@ -65,7 +68,7 @@ const Header = ({ setIsUserLoggedIn, setTokenState }) => {
     padding: 0 2rem;
 
     @media screen and (max-width: 768px) {
-      padding-top: 4rem;
+      padding-top: 8rem;
       /* background-color: rgba(0,0,0,0); */
       background-color: ${isNavToggled ? "#ffffff" : "rgba(0,0,0,0);"};
     }
@@ -98,7 +101,7 @@ const Header = ({ setIsUserLoggedIn, setTokenState }) => {
     <header css={headerStyle}>
       <nav css={navbarStyle}>
         <button onClick={onToggleHandler} css={toggleBtnStyle}>
-          Toggle
+          <img src="navbar/icons8-menu.svg" />
         </button>
         <ul>
           <li>

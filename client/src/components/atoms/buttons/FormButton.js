@@ -14,8 +14,12 @@ const buttonStyle = css`
   width: 100%;
 `;
 
-const FormButton = ({ btnText }) => {
-  return <button css={buttonStyle}>{btnText}</button>;
+const FormButton = ({ btnText, autoFocus }) => {
+  return (
+    <button autoFocus={autoFocus} css={buttonStyle}>
+      {btnText}
+    </button>
+  );
 };
 
 export default FormButton;
