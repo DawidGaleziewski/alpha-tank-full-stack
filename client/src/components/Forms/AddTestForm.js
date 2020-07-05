@@ -9,7 +9,7 @@ import FormButton from "../atoms/buttons/FormButton";
 // Utils
 import { getAuthHeader } from "../../utils/tokenUtils";
 // Styles
-import barFormStyle from "./styles/barFormStyle";
+import { barFormStyle } from "./styles/barFormStyle";
 
 /**@jsx jsx */
 

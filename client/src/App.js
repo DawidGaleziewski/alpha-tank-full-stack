@@ -52,7 +52,9 @@ function App() {
 
   const loginOnMount = async (isUserLoggedIn, tokenState) => {
     const token = getUserToken(tokenState);
+    // console.log(token);
     if (!isUserLoggedIn && token) {
+      console.log(token);
       const authHeader = pipe(
         formatBearerToken,
         formatAuthorizationHeader

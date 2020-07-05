@@ -1,39 +1,50 @@
-import {pipe} from './generalUtils';
+import { pipe } from "./generalUtils";
 
 const getAuthHeader = (tokenState) => {
-    return pipe(getUserToken, formatBearerToken, formatAuthorizationHeader)(tokenState)
-}
+  return pipe(
+    getUserToken,
+    formatBearerToken,
+    formatAuthorizationHeader
+  )(tokenState);
+};
 
 const formatAuthorizationHeader = (bearerToken) => {
-    if(!bearerToken){
-        return null;
-    }
-    return {
-        Authorization: bearerToken
-    }
-}
+  if (!bearerToken) {
+    return null;
+  }
+  return {
+    Authorization: bearerToken,
+  };
+};
 
 const formatBearerToken = (userToken) => {
-    if(!userToken) {
-        return null;
-    }
-    const bearerToken = `Bearer ${userToken}`;
-    return bearerToken
-}
+  if (!userToken) {
+    return null;
+  }
+  const bearerToken = `Bearer ${userToken}`;
+  return bearerToken;
+};
 
 const getUserToken = (tokenState) => {
-    let userToken = null;
+  let userToken = null;
+  console.log(tokenState);
+
+  if (tokenState) {
+    userToken = tokenState;
+  } else if (document.cookie.indexOf("token") !== -1) {
     try {
-        userToken = tokenState ? tokenState : JSON.parse(document.cookie).token;
-    } catch(error){
-        console.log(error)
+      userToken = JSON.parse(document.cookie).token;
+      console.log(userToken);
+    } catch (error) {
+      console.log(error);
     }
-    return userToken
-}
+  }
+  return userToken;
+};
 
 export {
-    getAuthHeader,
-    formatAuthorizationHeader,
-    formatBearerToken,
-    getUserToken
+  getAuthHeader,
+  formatAuthorizationHeader,
+  formatBearerToken,
+  getUserToken,
 };

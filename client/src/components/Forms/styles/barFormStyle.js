@@ -1,6 +1,12 @@
 import { css, jsx } from "@emotion/core";
 
-const barFormStyle = css`
+const formWrapper = css`
+  @media screen and (max-width: 768px) {
+    padding: 1.6rem 0;
+  }
+`;
+
+const barFormStyle = (isFormToggled) => css`
   background-color: #fff;
   /* padding: 2rem 4rem; */
   /* border-radius: 16px 16px 0 0; */
@@ -17,7 +23,7 @@ const barFormStyle = css`
   @media screen and (max-width: 768px) {
     position: absolute;
     background-color: #fff;
-    display: block;
+    display: ${isFormToggled ? "block" : "none"};
     padding: 4rem;
     border-radius: 16px;
     box-shadow: -1px 1px 21px 10px rgba(240, 243, 248, 1);
@@ -34,4 +40,4 @@ const barFormStyle = css`
   }
 `;
 
-export default barFormStyle;
+export { barFormStyle, formWrapper };

@@ -13,11 +13,19 @@ const buttonStyle = css`
   & > img {
     width: 100%;
   }
+
+  @media screen and (min-width: 768px) {
+    display: none;
+  }
 `;
 
 const CloseWindowButton = ({ onClickHandler }) => {
   return (
-    <button className="close-window-btn" css={buttonStyle}>
+    <button
+      onClick={onClickHandler}
+      className="close-window-btn"
+      css={buttonStyle}
+    >
       <img src="/close-x.png" alt="close" />
     </button>
   );
