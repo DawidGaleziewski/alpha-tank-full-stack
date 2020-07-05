@@ -6,27 +6,13 @@ import { css, jsx } from "@emotion/core";
 import InputSlider from "../atoms/inputs/InputSlider";
 import FormButton from "../atoms/buttons/FormButton";
 import CloseWindowButton from "../atoms/buttons/CloseWindowButton";
+import ToggleFormButton from "../atoms/buttons/ToggleFormButton";
 // Utils
 import { getAuthHeader } from "../../utils/tokenUtils";
 // Styles
 import { barFormStyle, formWrapper } from "./styles/barFormStyle";
 
 /** @jsx jsx */
-
-const formToggleStyle = css`
-  background-color: #3fbe90;
-  border: none;
-  padding: 0.8rem;
-  border-radius: 2px;
-  cursor: pointer;
-  text-transform: uppercase;
-  color: #ffffff;
-  display: block;
-
-  @media screen and (min-width: 768px) {
-    display: none;
-  }
-`;
 
 const AddTankForm = ({
   tokenState,
@@ -72,9 +58,13 @@ const AddTankForm = ({
   };
   return (
     <section css={formWrapper}>
-      <button onClick={toggleMobileFormHandler} css={formToggleStyle}>
+      <ToggleFormButton
+        buttonText="New tank"
+        onClickHandler={toggleMobileFormHandler}
+      />
+      {/* <button onClick={toggleMobileFormHandler} css={formToggleStyle}>
         New tank
-      </button>
+      </button> */}
       <form css={barFormStyle(isMobileFormToggled)} onSubmit={onSubmitHandler}>
         <CloseWindowButton onClickHandler={toggleMobileFormHandler} />
         <InputSlider

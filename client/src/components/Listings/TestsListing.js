@@ -3,6 +3,9 @@ import { css, jsx } from "@emotion/core";
 
 /** @jsx jsx */
 
+const tableWrapper = css`
+  overflow-y: scroll;
+`;
 const tableStyle = css`
   /* display: block; */
   font-size: 1.6rem;
@@ -32,30 +35,32 @@ const tableStyle = css`
 
 const TestsListing = ({ testsState }) => {
   return (
-    <table css={tableStyle}>
-      <thead>
-        <tr>
-          <th>Date of test</th>
-          <th>NH3</th>
-          <th>NH4</th>
-          <th>NO3</th>
-          <th>PH</th>
-          <th>temperature (celc)</th>
-        </tr>
-      </thead>
-      <tbody>
-        {testsState.map((test) => (
-          <tr key={test._id}>
-            <td>{test.dateOfTest}</td>
-            <td>{test.nh3}</td>
-            <td>{test.nh4}</td>
-            <td>{test.no3}</td>
-            <td>{test.ph}</td>
-            <td>{test.tempCelc}</td>
+    <section css={tableWrapper}>
+      <table css={tableStyle}>
+        <thead>
+          <tr>
+            <th>Date of test</th>
+            <th>NH3</th>
+            <th>NH4</th>
+            <th>NO3</th>
+            <th>PH</th>
+            <th>temperature (celc)</th>
           </tr>
-        ))}
-      </tbody>
-    </table>
+        </thead>
+        <tbody>
+          {testsState.map((test) => (
+            <tr key={test._id}>
+              <td>{test.dateOfTest}</td>
+              <td>{test.nh3}</td>
+              <td>{test.nh4}</td>
+              <td>{test.no3}</td>
+              <td>{test.ph}</td>
+              <td>{test.tempCelc}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </section>
   );
 };
 
