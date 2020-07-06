@@ -52,7 +52,8 @@ const AddTankForm = ({
   const [formState, setFormState] = useState(initialState);
   const [isMobileFormToggled, setIsMobileFormToggled] = useState(false);
 
-  const toggleMobileFormHandler = () => {
+  const toggleMobileFormHandler = (event) => {
+    event.preventDefault();
     setIsMobileFormToggled(!isMobileFormToggled);
     console.log(isMobileFormToggled);
   };
@@ -104,7 +105,7 @@ const AddTankForm = ({
           type={"text"}
           name={"aquariumType"}
           labelText={"aquarium type"}
-          value={formState.sizeZ}
+          value={formState.aquariumType}
           onChange={onChangeHandler}
         />
 
