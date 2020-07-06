@@ -27,7 +27,8 @@ const AddTestForm = ({ tokenState, tankID, setTestsState, testsState }) => {
   const [formState, setFormState] = useState(initialState);
   const [isMobileFormToggled, setIsMobileFormToggled] = useState(false);
 
-  const toggleMobileFormHandler = () => {
+  const toggleMobileFormHandler = (event) => {
+    event.preventDefault();
     setIsMobileFormToggled(!isMobileFormToggled);
     console.log(isMobileFormToggled);
   };
