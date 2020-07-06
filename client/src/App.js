@@ -105,15 +105,17 @@ function App() {
               />
             )}
           />
+          {/* Started working on fixing this route */}
           <Route
             path="/tanks/:tankID"
             exact
-            component={Tank}
-            tokenState={tokenState}
+            render={(props) => (
+              <Tank tokenState={tokenState} isUserLoggedIn={isUserLoggedIn} />
+            )}
           />
           <Route
             path="/me"
-            exec
+            // exec
             render={() => (
               <UserProfile
                 userAccountInfo={userAccountInfo}

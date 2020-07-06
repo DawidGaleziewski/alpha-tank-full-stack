@@ -1,5 +1,6 @@
 import React, { Fragment, useState, useEffect } from "react";
 import axios from "axios";
+import { Redirect } from "react-router-dom";
 // Components
 import Dashboard from "../Dashboard/Dashboard";
 import TestsListing from "../Listings/TestsListing";
@@ -7,7 +8,9 @@ import AddTestForm from "../Forms/AddTestForm";
 // Utils
 import { getAuthHeader } from "../../utils/tokenUtils";
 
-const Tank = ({ tokenState, match }) => {
+const Tank = ({ isUserLoggedIn, tokenState, match }) => {
+  console.log(params);
+  console.log(isUserLoggedIn);
   const {
     params: { tankID },
   } = match;
@@ -28,18 +31,22 @@ const Tank = ({ tokenState, match }) => {
     populateTankAndTestsInformation(tokenState, tankID);
   }, [tokenState, tankID]);
 
-  return (
-    <Dashboard>
-      <h2>{tankState.name}</h2>
-      <AddTestForm
-        tankID={tankID}
-        tokenState={tokenState}
-        testsState={testsState}
-        setTestsState={setTestsState}
-      />
-      <TestsListing testsState={testsState} />
-    </Dashboard>
-  );
+  if (isUserLoggedIn) {
+    return (
+      <Dashboard>
+        <h2>{tankState.name}</h2>
+        <AddTestForm
+          tankID={tankID}
+          tokenState={tokenState}
+          testsState={testsState}
+          setTestsState={setTestsState}
+        />
+        <TestsListing testsState={testsState} />
+      </Dashboard>
+    );
+  } else {
+    return <Redirect to={"/"} />;
+  }
 };
 
 export default Tank;
