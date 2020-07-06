@@ -1,4 +1,4 @@
-import { pipe } from "./generalUtils";
+import { pipe, getCookie } from "./generalUtils";
 
 const getAuthHeader = (tokenState) => {
   return pipe(
@@ -27,14 +27,13 @@ const formatBearerToken = (userToken) => {
 
 const getUserToken = (tokenState) => {
   let userToken = null;
-  console.log(tokenState);
 
   if (tokenState) {
     userToken = tokenState;
   } else if (document.cookie.indexOf("token") !== -1) {
     try {
-      userToken = JSON.parse(document.cookie).token;
-      console.log(userToken);
+      console.log("user token:", getCookie("token"));
+      userToken = getCookie("token");
     } catch (error) {
       console.log(error);
     }

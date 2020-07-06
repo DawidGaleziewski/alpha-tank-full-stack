@@ -1,26 +1,33 @@
 const pipe = (...fns) => (x) => fns.reduce((v, f) => f(v), x);
 
-const setCookie = (data) => {
-    let newCookieObj = {};
-    try {
-        newCookieObj = document.cookie.length > 0 ? {...JSON.parse(document.cookie), ...data} : {...data};
-        document.cookie = JSON.stringify(newCookieObj);
-    } catch(error){
-        console.log('Error setting cookies')
+const setCookie = (label, data) => {
+  try {
+    console.log("label:", label, "data", data);
+    document.cookie = `${label}=${data}`;
+  } catch (error) {
+    console.log("Error setting cookies");
+  }
+};
+
+const deleteFromCookie = (label) => {
+  document.cookie = `${label}= ; expires = Thu, 01 Jan 1970 00:00:00 GMT`;
+};
+
+const getCookie = (label) => {
+  let cookieValue = null;
+  try {
+    if (document.cookie.indexOf(label !== 0)) {
+      cookieValue = document.cookie
+        .split(";")
+        .filter((row) => row.startsWith(label))[0]
+        .split("=")[1];
     }
-    return newCookieObj; 
-}
+  } catch (error) {
+    console.log(error);
+  }
 
-const deleteFromCookie = (key) => {
-    const cookie = JSON.parse(document.cookie);
+  console.log(cookieValue);
+  return cookieValue;
+};
 
-    delete cookie[key];
-    console.log(cookie)
-    document.cookie = JSON.stringify(cookie)
-}
-
-export {
-    pipe,
-    setCookie,
-    deleteFromCookie
-}
+export { pipe, setCookie, deleteFromCookie, getCookie };

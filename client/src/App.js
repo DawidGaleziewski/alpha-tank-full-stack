@@ -52,13 +52,14 @@ function App() {
 
   const loginOnMount = async (isUserLoggedIn, tokenState) => {
     const token = getUserToken(tokenState);
-    // console.log(token);
+    console.log("token is:", token);
     if (!isUserLoggedIn && token) {
       console.log(token);
       const authHeader = pipe(
         formatBearerToken,
         formatAuthorizationHeader
       )(token);
+      console.log(authHeader);
       try {
         const { data } = await axios.get("/users/me", { headers: authHeader });
         setTokenState(token);

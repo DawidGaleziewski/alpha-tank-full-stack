@@ -29,7 +29,7 @@ const RegisterForm = ({ setIsUserLoggedIn, setTokenState }) => {
       } = res;
       setIsUserLoggedIn(true);
       setTokenState(token);
-      setCookie({ token });
+      setCookie("token", token);
     });
   };
   const onChangeHandler = (event) => {

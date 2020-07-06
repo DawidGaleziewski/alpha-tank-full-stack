@@ -13,9 +13,6 @@ import formDefaultStyle from "./styles/formDefaultStyle";
 /** @jsx jsx */
 
 const LoginForm = ({ setTokenState, setIsUserLoggedIn }) => {
-  // useEffect(() => {
-  //   document.querySelector("form").click();
-  // }, []);
   const onSubmitHandler = (event) => {
     event.preventDefault();
     axios.post("/users/login", formState).then((res) => {
@@ -24,7 +21,7 @@ const LoginForm = ({ setTokenState, setIsUserLoggedIn }) => {
       } = res;
       setTokenState(token);
       setIsUserLoggedIn(true);
-      setCookie({ token });
+      setCookie("token", token);
     });
   };
   const onChangeHandler = (event) => {
