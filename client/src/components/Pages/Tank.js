@@ -9,7 +9,7 @@ import AddTestForm from "../Forms/AddTestForm";
 import { getAuthHeader } from "../../utils/tokenUtils";
 
 const Tank = ({ isUserLoggedIn, tokenState, match }) => {
-  console.log(params);
+  console.log(isUserLoggedIn, tokenState, match);
   console.log(isUserLoggedIn);
   const {
     params: { tankID },

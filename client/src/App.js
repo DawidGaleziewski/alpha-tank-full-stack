@@ -110,7 +110,11 @@ function App() {
             path="/tanks/:tankID"
             exact
             render={(props) => (
-              <Tank tokenState={tokenState} isUserLoggedIn={isUserLoggedIn} />
+              <Tank
+                {...props}
+                tokenState={tokenState}
+                isUserLoggedIn={isUserLoggedIn}
+              />
             )}
           />
           <Route
