@@ -19,6 +19,8 @@
 - Data sanitaize - tanks no minus values
 - Data sanitaize - chems no minus values
 - Register form toggle
+- page title and helmet
+- favicon
 
 ## Backend
 

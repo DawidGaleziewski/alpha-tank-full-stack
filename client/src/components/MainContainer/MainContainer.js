@@ -1,6 +1,7 @@
 import React, { Fragment } from "react";
 import { css, jsx } from "@emotion/core";
 import Header from "../Header/Header";
+import BarAlert from "../atoms/alerts/BarAlert";
 
 /** @jsx jsx */
 const mainContainerStyle = css`
@@ -15,6 +16,10 @@ const MainContainer = ({ setIsUserLoggedIn, children, setTokenState }) => {
       <Header
         setIsUserLoggedIn={setIsUserLoggedIn}
         setTokenState={setTokenState}
+      />
+      <BarAlert
+        alertText={"Danger: something went wrong!"}
+        alertType={"danger"}
       />
       <main css={mainContainerStyle}>{children}</main>
     </Fragment>
