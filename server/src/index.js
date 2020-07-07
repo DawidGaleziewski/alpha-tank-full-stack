@@ -8,7 +8,7 @@ require("./db/mongoose");
 const app = express();
 
 // constant values
-const port = process.env.PORT || 8000;
+const port = process.env.PORT || 80;
 
 // Routers
 const userRouter = require("./routers/users");
