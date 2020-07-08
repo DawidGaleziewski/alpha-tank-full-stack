@@ -25,11 +25,11 @@ const MainContainer = ({
       />
       {alerts.map((alert) => (
         <BarAlert
-          key={alert.index}
+          key={alert.id}
           alertType={alert.type}
           alertText={alert.text}
           removeAlert={removeAlert}
-          index={alert.index}
+          id={alert.id}
         />
       ))}
       {/* <BarAlert

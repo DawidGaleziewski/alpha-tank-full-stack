@@ -27,7 +27,7 @@ const LoginForm = ({ setTokenState, setIsUserLoggedIn, addAlert }) => {
         setCookie("token", token);
       })
       .catch((error) => {
-        addAlert("danger", "unable to login");
+        addAlert("danger", "unable to login", 3000);
         console.log(error);
       });
   };

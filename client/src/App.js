@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Route } from "react-router-dom";
 import axios from "axios";
 import { Global, css, jsx } from "@emotion/core";
 import ReactGa from "react-ga";
+import { v4 as uuidv4 } from "uuid";
 
 // Components
 import MainContainer from "./components/MainContainer/MainContainer";
@@ -81,18 +82,33 @@ function App() {
     loginOnMount(isUserLoggedIn, tokenState);
   }, [isUserLoggedIn]);
 
-  const addAlert = (alertType, alertText) => {
+  const addAlert = (alertType, alertText, alertTimeMilliseconds) => {
+    const index = alerts.length;
+    const interval = expireAlertInterval(index, alertTimeMilliseconds);
     setAlerts(
       alerts.concat([
-        { text: alertText, type: alertType, index: alerts.length },
+        {
+          text: alertText,
+          type: alertType,
+          id: uuidv4(),
+          interval: interval,
+        },
       ])
     );
   };
 
-  const removeAlert = (index) => {
-    const newArray = [...alerts];
-    newArray.splice(index, 1);
+  const removeAlert = (id) => {
+    const newArray = [...alerts].filter((alert) => alert.id !== id);
+    // newArray.splice(index, 1);
     setAlerts(newArray);
+  };
+
+  const expireAlertInterval = (id, timeMilliseconds) => {
+    const interval = setTimeout(() => {
+      removeAlert(id);
+    }, timeMilliseconds);
+
+    return interval;
   };
 
   return (
