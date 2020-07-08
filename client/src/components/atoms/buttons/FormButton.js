@@ -23,7 +23,6 @@ const FormButton = ({ btnText, autoFocus }) => {
         window.location.pathname + window.location.search
       }`,
     });
-    alert("send to GA");
   };
   return (
     <button
