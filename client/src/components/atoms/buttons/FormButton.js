@@ -1,6 +1,6 @@
 import React from "react";
 import { css, jsx } from "@emotion/core";
-import ReactGa from "react-ga";
+import ReactGA from "react-ga";
 
 /** @jsx jsx */
 const buttonStyle = css`
@@ -17,7 +17,7 @@ const buttonStyle = css`
 
 const FormButton = ({ btnText, autoFocus }) => {
   const googleAnalyticsHandler = () => {
-    ReactGa.event({
+    ReactGA.event({
       category: "Button",
       action: `Click button ${btnText} from ${
         window.location.pathname + window.location.search
