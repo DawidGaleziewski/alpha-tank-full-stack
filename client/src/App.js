@@ -3,6 +3,7 @@ import React, { useState, useEffect } from "react";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import axios from "axios";
 import { Global, css, jsx } from "@emotion/core";
+import ReactGa from "react-ga";
 
 // Components
 import MainContainer from "./components/MainContainer/MainContainer";
@@ -71,6 +72,11 @@ function App() {
     }
   };
 
+  useEffect(() => {
+    ReactGa.initialize("UA-172045582-1");
+    //report page view
+    ReactGa.pageview(window.location.pathname + window.location.search);
+  }, []);
   useEffect(() => {
     loginOnMount(isUserLoggedIn, tokenState);
   }, [isUserLoggedIn]);
