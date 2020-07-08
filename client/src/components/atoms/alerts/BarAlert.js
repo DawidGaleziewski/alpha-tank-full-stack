@@ -51,9 +51,9 @@ const closeBtnStyle = css`
   display: block;
 `;
 
-const BarAlert = ({ alertText, alertType }) => {
+const BarAlert = ({ alertText, alertType, removeAlert, index }) => {
   const closeBtnClickHandler = (event) => {
-    event.target.parentNode.style.display = "none";
+    removeAlert(index);
   };
   return (
     <div css={alertStyle(alertType)}>

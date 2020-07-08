@@ -12,18 +12,24 @@ import formDefaultStyle from "./styles/formDefaultStyle";
 
 /** @jsx jsx */
 
-const LoginForm = ({ setTokenState, setIsUserLoggedIn }) => {
+const LoginForm = ({ setTokenState, setIsUserLoggedIn, addAlert }) => {
   const onSubmitHandler = (event) => {
     event.preventDefault();
-    axios.post("/users/login", formState).then((res) => {
-      const {
-        data: { token },
-      } = res;
-      // console.log("aaaaaaaa", token);
-      setTokenState(token);
-      setIsUserLoggedIn(true);
-      setCookie("token", token);
-    });
+    axios
+      .post("/users/login", formState)
+      .then((res) => {
+        const {
+          data: { token },
+        } = res;
+        // console.log("aaaaaaaa", token);
+        setTokenState(token);
+        setIsUserLoggedIn(true);
+        setCookie("token", token);
+      })
+      .catch((error) => {
+        addAlert("danger", "unable to login");
+        console.log(error);
+      });
   };
   const onChangeHandler = (event) => {
     const {

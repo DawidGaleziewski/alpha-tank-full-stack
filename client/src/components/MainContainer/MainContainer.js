@@ -10,16 +10,28 @@ const mainContainerStyle = css`
   margin-right: auto;
 `;
 
-const MainContainer = ({ setIsUserLoggedIn, children, setTokenState }) => {
+const MainContainer = ({
+  setIsUserLoggedIn,
+  children,
+  setTokenState,
+  alerts,
+  removeAlert,
+}) => {
   return (
     <Fragment>
       <Header
         setIsUserLoggedIn={setIsUserLoggedIn}
         setTokenState={setTokenState}
       />
-      {/* {alerts.map((alert) => (
-        <BarAlert alertType={alert.type} alertText={alert.text} />
-      ))} */}
+      {alerts.map((alert) => (
+        <BarAlert
+          key={alert.index}
+          alertType={alert.type}
+          alertText={alert.text}
+          removeAlert={removeAlert}
+          index={alert.index}
+        />
+      ))}
       {/* <BarAlert
         alertText={"Danger: something went wrong!"}
         alertType={"danger"}

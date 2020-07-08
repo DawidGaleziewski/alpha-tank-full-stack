@@ -81,6 +81,20 @@ function App() {
     loginOnMount(isUserLoggedIn, tokenState);
   }, [isUserLoggedIn]);
 
+  const addAlert = (alertType, alertText) => {
+    setAlerts(
+      alerts.concat([
+        { text: alertText, type: alertType, index: alerts.length },
+      ])
+    );
+  };
+
+  const removeAlert = (index) => {
+    const newArray = [...alerts];
+    newArray.splice(index, 1);
+    setAlerts(newArray);
+  };
+
   return (
     <div className="App">
       <Global styles={globalStyles} />
@@ -90,6 +104,7 @@ function App() {
           setTokenState={setTokenState}
           setAlerts={setAlerts}
           alerts={alerts}
+          removeAlert={removeAlert}
         >
           <Route
             path="/"
@@ -100,6 +115,7 @@ function App() {
                 setIsUserLoggedIn={setIsUserLoggedIn}
                 tokenState={tokenState}
                 setTokenState={setTokenState}
+                addAlert={addAlert}
               />
             )}
           />
