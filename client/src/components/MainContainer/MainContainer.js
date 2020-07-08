@@ -1,4 +1,4 @@
-import React, { Fragment } from "react";
+import React, { Fragment, useState } from "react";
 import { css, jsx } from "@emotion/core";
 import Header from "../Header/Header";
 import BarAlert from "../atoms/alerts/BarAlert";
@@ -17,10 +17,13 @@ const MainContainer = ({ setIsUserLoggedIn, children, setTokenState }) => {
         setIsUserLoggedIn={setIsUserLoggedIn}
         setTokenState={setTokenState}
       />
-      <BarAlert
+      {/* {alerts.map((alert) => (
+        <BarAlert alertType={alert.type} alertText={alert.text} />
+      ))} */}
+      {/* <BarAlert
         alertText={"Danger: something went wrong!"}
         alertType={"danger"}
-      />
+      /> */}
       <main css={mainContainerStyle}>{children}</main>
     </Fragment>
   );

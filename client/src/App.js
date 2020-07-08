@@ -50,10 +50,10 @@ function App() {
   const [tokenState, setTokenState] = useState(null);
   const [userAccountInfo, setUserAccountInfo] = useState({});
   const [isUserLoggedIn, setIsUserLoggedIn] = useState(false);
-
+  const [alerts, setAlerts] = useState([]);
   const loginOnMount = async (isUserLoggedIn, tokenState) => {
     const token = getUserToken(tokenState);
-    console.log("token is:", token);
+    // console.log("token is:", token);
     if (!isUserLoggedIn && token) {
       console.log(token);
       const authHeader = pipe(
@@ -88,6 +88,8 @@ function App() {
         <MainContainer
           setIsUserLoggedIn={setIsUserLoggedIn}
           setTokenState={setTokenState}
+          setAlerts={setAlerts}
+          alerts={alerts}
         >
           <Route
             path="/"

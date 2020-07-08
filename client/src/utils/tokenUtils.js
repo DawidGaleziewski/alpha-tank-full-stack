@@ -29,10 +29,11 @@ const getUserToken = (tokenState) => {
   let userToken = null;
 
   if (tokenState) {
+    console.log("utils token state is:", tokenState);
     userToken = tokenState;
   } else if (document.cookie.indexOf("token") !== -1) {
     try {
-      console.log("user token:", getCookie("token"));
+      // console.log("user token:", getCookie("token"));
       userToken = getCookie("token");
     } catch (error) {
       console.log(error);

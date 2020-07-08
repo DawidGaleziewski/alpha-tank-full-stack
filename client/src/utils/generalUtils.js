@@ -2,7 +2,7 @@ const pipe = (...fns) => (x) => fns.reduce((v, f) => f(v), x);
 
 const setCookie = (label, data) => {
   try {
-    console.log("label:", label, "data", data);
+    // console.log("label:", label, "data", data);
     document.cookie = `${label}=${data}`;
   } catch (error) {
     console.log("Error setting cookies");
@@ -19,14 +19,14 @@ const getCookie = (label) => {
     if (document.cookie.indexOf(label !== 0)) {
       cookieValue = document.cookie
         .split(";")
-        .filter((row) => row.startsWith(label))[0]
+        .filter((row) => row.indexOf(label) !== -1)[0]
         .split("=")[1];
     }
   } catch (error) {
     console.log(error);
   }
 
-  console.log(cookieValue);
+  // console.log(cookieValue);
   return cookieValue;
 };
 

@@ -19,6 +19,7 @@ const LoginForm = ({ setTokenState, setIsUserLoggedIn }) => {
       const {
         data: { token },
       } = res;
+      // console.log("aaaaaaaa", token);
       setTokenState(token);
       setIsUserLoggedIn(true);
       setCookie("token", token);
