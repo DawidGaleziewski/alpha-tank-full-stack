@@ -51,13 +51,13 @@ const closeBtnStyle = css`
   display: block;
 `;
 
-const BarAlert = ({ alertText, alertType, removeAlert, index }) => {
+const BarAlert = ({ alertText, alertType, removeAlert, id }) => {
   const closeBtnClickHandler = (event) => {
-    removeAlert(index);
+    removeAlert(id);
   };
   return (
     <div css={alertStyle(alertType)}>
-      {alertText}{" "}
+      {alertText} {id}
       <span onClick={closeBtnClickHandler} css={closeBtnStyle}>
         X
       </span>

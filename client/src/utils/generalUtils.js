@@ -30,4 +30,9 @@ const getCookie = (label) => {
   return cookieValue;
 };
 
-export { pipe, setCookie, deleteFromCookie, getCookie };
+const deepCopy = (obj) => {
+  const newObj = JSON.parse(JSON.stringify(obj));
+  return newObj;
+};
+
+export { pipe, setCookie, deleteFromCookie, getCookie, deepCopy };

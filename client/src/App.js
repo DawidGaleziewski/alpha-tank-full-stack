@@ -1,5 +1,5 @@
 // Libs
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import axios from "axios";
 import { Global, css, jsx } from "@emotion/core";
@@ -19,7 +19,7 @@ import {
   formatAuthorizationHeader,
   formatBearerToken,
 } from "./utils/tokenUtils";
-import { pipe } from "./utils/generalUtils";
+import { pipe, deepCopy } from "./utils/generalUtils";
 
 /** @jsx jsx */
 const globalStyles = css`
@@ -82,15 +82,17 @@ function App() {
     loginOnMount(isUserLoggedIn, tokenState);
   }, [isUserLoggedIn]);
 
+  useEffect(() => {}, [alerts]);
+
   const addAlert = (alertType, alertText, alertTimeMilliseconds) => {
-    const index = alerts.length;
-    const interval = expireAlertInterval(index, alertTimeMilliseconds);
+    const id = uuidv4();
+    const interval = expireAlertInterval(id, alertTimeMilliseconds);
     setAlerts(
       alerts.concat([
         {
           text: alertText,
           type: alertType,
-          id: uuidv4(),
+          id: id,
           interval: interval,
         },
       ])
@@ -98,14 +100,15 @@ function App() {
   };
 
   const removeAlert = (id) => {
-    const newArray = [...alerts].filter((alert) => alert.id !== id);
     // newArray.splice(index, 1);
-    setAlerts(newArray);
+    console.log(id);
+    setAlerts(alerts.filter((alert) => alert.id !== id));
   };
 
   const expireAlertInterval = (id, timeMilliseconds) => {
     const interval = setTimeout(() => {
       removeAlert(id);
+      // clearTimeout(interval);
     }, timeMilliseconds);
 
     return interval;
