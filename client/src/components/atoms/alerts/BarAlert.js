@@ -57,7 +57,7 @@ const BarAlert = ({ alertText, alertType, removeAlert, id }) => {
   };
   return (
     <div css={alertStyle(alertType)}>
-      {alertText} {id}
+      {alertText}
       <span onClick={closeBtnClickHandler} css={closeBtnStyle}>
         X
       </span>

@@ -22,6 +22,7 @@ const Login = ({
         <RegisterForm
           setIsUserLoggedIn={setIsUserLoggedIn}
           setTokenState={setTokenState}
+          addAlert={addAlert}
         />
       </Fragment>
     );

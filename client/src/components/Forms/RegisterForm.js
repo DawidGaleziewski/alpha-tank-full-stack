@@ -12,7 +12,7 @@ import formDefaultStyle from "./styles/formDefaultStyle";
 
 /** @jsx jsx */
 
-const RegisterForm = ({ setIsUserLoggedIn, setTokenState }) => {
+const RegisterForm = ({ setIsUserLoggedIn, setTokenState, addAlert }) => {
   const initialState = {
     email: "",
     password: "",
@@ -23,14 +23,30 @@ const RegisterForm = ({ setIsUserLoggedIn, setTokenState }) => {
   const [formState, setFormState] = useState(initialState);
   const onSubmitHandler = (event) => {
     event.preventDefault();
-    axios.post("/users", formState).then((res) => {
-      const {
-        data: { token },
-      } = res;
-      setIsUserLoggedIn(true);
-      setTokenState(token);
-      setCookie("token", token);
-    });
+    axios
+      .post("/users", formState)
+      .then((res) => {
+        const {
+          data: { token },
+        } = res;
+
+        setIsUserLoggedIn(true);
+        setTokenState(token);
+        setCookie("token", token);
+      })
+      .catch((error) => {
+        console.log(error.response);
+        const emailExsistsErrorCode = 409;
+        if (error.response.status === emailExsistsErrorCode) {
+          addAlert("danger", "This email is taken. Try another one", 3000);
+        } else {
+          addAlert(
+            "danger",
+            "Ups, unable to register. Check your data and try once again",
+            3000
+          );
+        }
+      });
   };
   const onChangeHandler = (event) => {
     const value =
