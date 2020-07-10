@@ -82,36 +82,37 @@ function App() {
     loginOnMount(isUserLoggedIn, tokenState);
   }, [isUserLoggedIn]);
 
-  useEffect(() => {}, [alerts]);
+  // useEffect(() => {}, [alerts]);
 
   const addAlert = (alertType, alertText, alertTimeMilliseconds) => {
     const id = uuidv4();
-    const interval = expireAlertInterval(id, alertTimeMilliseconds);
-    setAlerts(
-      alerts.concat([
-        {
-          text: alertText,
-          type: alertType,
-          id: id,
-          interval: interval,
-        },
-      ])
-    );
+    // const interval = expireAlertInterval(id, alertTimeMilliseconds);
+    setAlerts([
+      ...alerts,
+      {
+        text: alertText,
+        type: alertType,
+        id: id,
+        // interval: interval,
+      },
+    ]);
   };
+
+  const lastTimeout = useRef(null);
+
+  useEffect(() => {
+    if (alerts.length > 0) {
+      clearTimeout(lastTimeout.current);
+      const timeoutFn = setTimeout(() => {
+        removeAlert(alerts[alerts.length - 1].id);
+      }, 3000);
+      lastTimeout.current = timeoutFn;
+    }
+  }, [alerts]);
 
   const removeAlert = (id) => {
-    // newArray.splice(index, 1);
     console.log(id);
-    setAlerts(alerts.filter((alert) => alert.id !== id));
-  };
-
-  const expireAlertInterval = (id, timeMilliseconds) => {
-    const interval = setTimeout(() => {
-      removeAlert(id);
-      // clearTimeout(interval);
-    }, timeMilliseconds);
-
-    return interval;
+    setAlerts([...alerts].filter((alert) => alert.id !== id));
   };
 
   return (
