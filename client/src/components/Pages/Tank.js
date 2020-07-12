@@ -8,7 +8,7 @@ import AddTestForm from "../Forms/AddTestForm";
 // Utils
 import { getAuthHeader } from "../../utils/tokenUtils";
 
-const Tank = ({ isUserLoggedIn, tokenState, match }) => {
+const Tank = ({ isUserLoggedIn, tokenState, match, addAlert }) => {
   console.log(isUserLoggedIn, tokenState, match);
   console.log(isUserLoggedIn);
   const {
@@ -40,6 +40,7 @@ const Tank = ({ isUserLoggedIn, tokenState, match }) => {
           tokenState={tokenState}
           testsState={testsState}
           setTestsState={setTestsState}
+          addAlert={addAlert}
         />
         <TestsListing testsState={testsState} />
       </Dashboard>

@@ -18,6 +18,7 @@ const AddTankForm = ({
   tokenState,
   setTanksListingState,
   tanksListingState,
+  addAlert,
 }) => {
   const onSubmitHandler = (event) => {
     event.preventDefault();
@@ -28,6 +29,12 @@ const AddTankForm = ({
         setTanksListingState([...tanksListingState, res.data]);
       })
       .catch((error) => {
+        addAlert(
+          "danger",
+          "Ups. Unable to add tank. Check data and try again",
+          3000
+        );
+        console.log("add alert fn:", addAlert);
         console.log(error);
       });
   };

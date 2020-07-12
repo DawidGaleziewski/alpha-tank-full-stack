@@ -9,7 +9,8 @@ import TankListing from "../Listings/TanksListing";
 // Utils
 import { getAuthHeader } from "../../utils/tokenUtils";
 
-const TanksHome = ({ isUserLoggedIn, tokenState }) => {
+const TanksHome = ({ isUserLoggedIn, tokenState, addAlert }) => {
+  // addAlert("danger", "Ups. Unable to add tank. Check data and try again", 3000);
   const [tanksListingState, setTanksListingState] = useState([]);
   const populateTanksListing = async (tokenState) => {
     const authHeader = getAuthHeader(tokenState);
@@ -32,6 +33,7 @@ const TanksHome = ({ isUserLoggedIn, tokenState }) => {
             tokenState={tokenState}
             setTanksListingState={setTanksListingState}
             tanksListingState={tanksListingState}
+            addAlert={addAlert}
           />
           <TankListing tanksListingState={tanksListingState} />
         </Dashboard>

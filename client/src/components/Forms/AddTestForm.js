@@ -15,7 +15,13 @@ import { barFormStyle, formWrapper } from "./styles/barFormStyle";
 
 /**@jsx jsx */
 
-const AddTestForm = ({ tokenState, tankID, setTestsState, testsState }) => {
+const AddTestForm = ({
+  tokenState,
+  tankID,
+  setTestsState,
+  testsState,
+  addAlert,
+}) => {
   const initialState = {
     dateOfTest: "",
     nh3: "",
@@ -44,6 +50,11 @@ const AddTestForm = ({ tokenState, tankID, setTestsState, testsState }) => {
       );
       setTestsState([...testsState, data]);
     } catch (error) {
+      addAlert(
+        "danger",
+        "Ups. Unable to add test. Check data and try again",
+        3000
+      );
       console.log(error);
     }
   };

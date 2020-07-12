@@ -146,6 +146,7 @@ function App() {
               <TanksHome
                 isUserLoggedIn={isUserLoggedIn}
                 tokenState={tokenState}
+                addAlert={addAlert}
               />
             )}
           />
@@ -158,6 +159,7 @@ function App() {
                 {...props}
                 tokenState={tokenState}
                 isUserLoggedIn={isUserLoggedIn}
+                addAlert={addAlert}
               />
             )}
           />
