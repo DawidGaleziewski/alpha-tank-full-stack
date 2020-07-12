@@ -22,7 +22,7 @@
 - Data sanitaize - chems no minus values
 - Register form toggle
 - page title and helmet
-- favicon
+- favicon [x]
 - Tank page reload cancel axios call on unmount
 
 ## Backend

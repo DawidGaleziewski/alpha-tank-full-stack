@@ -1,6 +1,8 @@
 import React from "react";
 import { css, jsx } from "@emotion/core";
 
+import DeleteBtn from "../atoms/buttons/DeleteBtn";
+
 /** @jsx jsx */
 
 const tableWrapper = css`
@@ -45,6 +47,7 @@ const TestsListing = ({ testsState }) => {
             <th>NO3</th>
             <th>PH</th>
             <th>temperature (celc)</th>
+            <th>delete</th>
           </tr>
         </thead>
         <tbody>
@@ -56,6 +59,12 @@ const TestsListing = ({ testsState }) => {
               <td>{test.no3}</td>
               <td>{test.ph}</td>
               <td>{test.tempCelc}</td>
+              <td>
+                <DeleteBtn
+                  btnText="Delete"
+                  modalText="Are you sure you want to delete this?"
+                />
+              </td>
             </tr>
           ))}
         </tbody>
