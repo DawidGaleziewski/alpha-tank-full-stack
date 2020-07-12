@@ -1,5 +1,5 @@
 // Libs
-import React, { useState } from "react";
+import React, { useState, Fragment } from "react";
 import axios from "axios";
 import { css, jsx } from "@emotion/core";
 // Components
@@ -8,6 +8,7 @@ import DatePicker from "../atoms/inputs/DatePicker";
 import FormButton from "../atoms/buttons/FormButton";
 import ToggleFormButton from "../atoms/buttons/ToggleFormButton";
 import CloseWindowButton from "../atoms/buttons/CloseWindowButton";
+import LoadingDefault from "../atoms/loadings/LoadingDefault";
 // Utils
 import { getAuthHeader } from "../../utils/tokenUtils";
 // Styles
@@ -32,6 +33,7 @@ const AddTestForm = ({
   };
   const [formState, setFormState] = useState(initialState);
   const [isMobileFormToggled, setIsMobileFormToggled] = useState(false);
+  const [isLoading, setIsloading] = useState(false);
 
   const toggleMobileFormHandler = (event) => {
     event.preventDefault();
@@ -42,6 +44,7 @@ const AddTestForm = ({
   const onSubmitHandler = async (event) => {
     event.preventDefault();
     const authHeader = getAuthHeader(tokenState);
+    setIsloading(true);
     try {
       const { data } = await axios.post(
         "/tests",
@@ -49,6 +52,7 @@ const AddTestForm = ({
         { headers: authHeader }
       );
       setTestsState([...testsState, data]);
+      setIsloading(false);
     } catch (error) {
       addAlert(
         "danger",
@@ -56,6 +60,7 @@ const AddTestForm = ({
         3000
       );
       console.log(error);
+      setIsloading(false);
     }
   };
   const onChangeHandler = (event) => {
@@ -73,55 +78,61 @@ const AddTestForm = ({
         onClickHandler={toggleMobileFormHandler}
       />
       <form css={barFormStyle(isMobileFormToggled)} onSubmit={onSubmitHandler}>
-        <CloseWindowButton onClickHandler={toggleMobileFormHandler} />
-        <DatePicker
-          id={"testDate"}
-          name={"dateOfTest"}
-          labelText={"date of testing"}
-          value={formState.dateOfTest}
-          onChangeHandler={onChangeHandler}
-        />
-        <InputSlider
-          id={"testNH3"}
-          type={"number"}
-          name={"nh3"}
-          labelText={"NH3"}
-          value={formState.nh3}
-          onChange={onChangeHandler}
-        />
-        <InputSlider
-          id={"testNH4"}
-          type={"number"}
-          name={"nh4"}
-          labelText={"NH4"}
-          value={formState.nh4}
-          onChange={onChangeHandler}
-        />
-        <InputSlider
-          id={"testNO3"}
-          type={"number"}
-          name={"no3"}
-          labelText={"NO3"}
-          value={formState.no3}
-          onChange={onChangeHandler}
-        />
-        <InputSlider
-          id={"testPH"}
-          type={"number"}
-          name={"ph"}
-          labelText={"PH"}
-          value={formState.ph}
-          onChange={onChangeHandler}
-        />
-        <InputSlider
-          id={"tempCelc"}
-          type={"number"}
-          name={"tempCelc"}
-          labelText={"temperature C"}
-          value={formState.tempCelc}
-          onChange={onChangeHandler}
-        />
-        <FormButton btnText={"add test"} />
+        {isLoading ? (
+          <LoadingDefault />
+        ) : (
+          <Fragment>
+            <CloseWindowButton onClickHandler={toggleMobileFormHandler} />
+            <DatePicker
+              id={"testDate"}
+              name={"dateOfTest"}
+              labelText={"date of testing"}
+              value={formState.dateOfTest}
+              onChangeHandler={onChangeHandler}
+            />
+            <InputSlider
+              id={"testNH3"}
+              type={"number"}
+              name={"nh3"}
+              labelText={"NH3"}
+              value={formState.nh3}
+              onChange={onChangeHandler}
+            />
+            <InputSlider
+              id={"testNH4"}
+              type={"number"}
+              name={"nh4"}
+              labelText={"NH4"}
+              value={formState.nh4}
+              onChange={onChangeHandler}
+            />
+            <InputSlider
+              id={"testNO3"}
+              type={"number"}
+              name={"no3"}
+              labelText={"NO3"}
+              value={formState.no3}
+              onChange={onChangeHandler}
+            />
+            <InputSlider
+              id={"testPH"}
+              type={"number"}
+              name={"ph"}
+              labelText={"PH"}
+              value={formState.ph}
+              onChange={onChangeHandler}
+            />
+            <InputSlider
+              id={"tempCelc"}
+              type={"number"}
+              name={"tempCelc"}
+              labelText={"temperature C"}
+              value={formState.tempCelc}
+              onChange={onChangeHandler}
+            />
+            <FormButton btnText={"add test"} />
+          </Fragment>
+        )}
       </form>
     </section>
   );
