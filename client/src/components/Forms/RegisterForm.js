@@ -1,10 +1,11 @@
 // Libs
-import React, { useState } from "react";
+import React, { useState, Fragment } from "react";
 import axios from "axios";
 import { css, jsx } from "@emotion/core";
 // Components
 import InputSlider from "../atoms/inputs/InputSlider";
 import FormButton from "../atoms/buttons/FormButton";
+import LoadingDefault from "../atoms/loadings/LoadingDefault";
 // Utils
 import { setCookie } from "../../utils/generalUtils";
 // Styles
@@ -21,8 +22,10 @@ const RegisterForm = ({ setIsUserLoggedIn, setTokenState, addAlert }) => {
     age: "",
   };
   const [formState, setFormState] = useState(initialState);
+  const [isLoading, setIsloading] = useState(false);
   const onSubmitHandler = (event) => {
     event.preventDefault();
+    setIsloading(true);
     axios
       .post("/users", formState)
       .then((res) => {
@@ -30,11 +33,13 @@ const RegisterForm = ({ setIsUserLoggedIn, setTokenState, addAlert }) => {
           data: { token },
         } = res;
 
+        setIsloading(false);
         setIsUserLoggedIn(true);
         setTokenState(token);
         setCookie("token", token);
       })
       .catch((error) => {
+        setIsloading(false);
         console.log(error.response);
         const emailExsistsErrorCode = 409;
         if (error.response.status === emailExsistsErrorCode) {
@@ -61,49 +66,54 @@ const RegisterForm = ({ setIsUserLoggedIn, setTokenState, addAlert }) => {
 
   return (
     <form css={formDefaultStyle} onSubmit={onSubmitHandler}>
-      <InputSlider
-        id={"registerEmail"}
-        type={"email"}
-        name={"email"}
-        labelText={"Your email"}
-        value={formState.email}
-        onChange={onChangeHandler}
-      />
-      <InputSlider
-        id={"registerPassword"}
-        type={"password"}
-        name={"password"}
-        labelText={"Password"}
-        value={formState.password}
-        onChange={onChangeHandler}
-      />
-      <InputSlider
-        id={"registerName"}
-        type={"text"}
-        name={"name"}
-        labelText={"Your name"}
-        value={formState.name}
-        onChange={onChangeHandler}
-      />
-      <InputSlider
-        id={"registerSurname"}
-        type={"text"}
-        name={"surname"}
-        labelText={"Your surname"}
-        value={formState.surname}
-        onChange={onChangeHandler}
-      />
-      <InputSlider
-        id={"registerAge"}
-        type={"number"}
-        name={"age"}
-        labelText={"Your age"}
-        value={formState.age}
-        onChange={onChangeHandler}
-      />
+      {isLoading ? (
+        <LoadingDefault />
+      ) : (
+        <Fragment>
+          <InputSlider
+            id={"registerEmail"}
+            type={"email"}
+            name={"email"}
+            labelText={"Your email"}
+            value={formState.email}
+            onChange={onChangeHandler}
+          />
+          <InputSlider
+            id={"registerPassword"}
+            type={"password"}
+            name={"password"}
+            labelText={"Password"}
+            value={formState.password}
+            onChange={onChangeHandler}
+          />
+          <InputSlider
+            id={"registerName"}
+            type={"text"}
+            name={"name"}
+            labelText={"Your name"}
+            value={formState.name}
+            onChange={onChangeHandler}
+          />
+          <InputSlider
+            id={"registerSurname"}
+            type={"text"}
+            name={"surname"}
+            labelText={"Your surname"}
+            value={formState.surname}
+            onChange={onChangeHandler}
+          />
+          <InputSlider
+            id={"registerAge"}
+            type={"number"}
+            name={"age"}
+            labelText={"Your age"}
+            value={formState.age}
+            onChange={onChangeHandler}
+          />
 
-      <FormButton btnText="register" />
-      {/* <input type="submit" value="register" /> */}
+          <FormButton btnText="register" />
+        </Fragment>
+      )}
     </form>
   );
 };

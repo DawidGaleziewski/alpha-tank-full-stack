@@ -4,6 +4,8 @@ import { css, jsx } from "@emotion/core";
 /** @jsx jsx */
 const loaderStyle = css`
   text-align: center;
+  margin-left: auto;
+  margin-right: auto;
   & > .loading-gif {
     /* margin-left: auto;
     margin-right: auto;

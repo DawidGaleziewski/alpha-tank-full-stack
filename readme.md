@@ -9,10 +9,12 @@
 - Updating profile
 - Email confirmation
 - Dates format
-- Loading - login form
-- Loading - register form
+- Loading - login form [x]
+- Loading - register form [x]
 - Loading - adding tanks
 - Loading - adding tests
+- Loading - fetching tanks
+- Loading - fetching tests
 - Error modal - login [x]
 - Error modal - adding tank [x]
 - Error modal - adding tests [x]

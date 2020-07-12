@@ -1,5 +1,5 @@
 // Libs
-import React, { useState } from "react";
+import React, { useState, Fragment } from "react";
 import axios from "axios";
 import { css, jsx } from "@emotion/core";
 // Components
@@ -7,6 +7,7 @@ import InputSlider from "../atoms/inputs/InputSlider";
 import FormButton from "../atoms/buttons/FormButton";
 import CloseWindowButton from "../atoms/buttons/CloseWindowButton";
 import ToggleFormButton from "../atoms/buttons/ToggleFormButton";
+import LoadingDefault from "../atoms/loadings/LoadingDefault";
 // Utils
 import { getAuthHeader } from "../../utils/tokenUtils";
 // Styles
@@ -20,15 +21,19 @@ const AddTankForm = ({
   tanksListingState,
   addAlert,
 }) => {
+  const [isLoading, setIsloading] = useState(false);
   const onSubmitHandler = (event) => {
     event.preventDefault();
     const authHeader = getAuthHeader(tokenState);
+    setIsloading(true);
     axios
       .post("/tanks", formState, { headers: authHeader })
       .then((res) => {
+        setIsloading(false);
         setTanksListingState([...tanksListingState, res.data]);
       })
       .catch((error) => {
+        setIsloading(false);
         addAlert(
           "danger",
           "Ups. Unable to add tank. Check data and try again",
@@ -62,7 +67,6 @@ const AddTankForm = ({
   const toggleMobileFormHandler = (event) => {
     event.preventDefault();
     setIsMobileFormToggled(!isMobileFormToggled);
-    console.log(isMobileFormToggled);
   };
   return (
     <section css={formWrapper}>
@@ -70,53 +74,56 @@ const AddTankForm = ({
         buttonText="New tank"
         onClickHandler={toggleMobileFormHandler}
       />
-      {/* <button onClick={toggleMobileFormHandler} css={formToggleStyle}>
-        New tank
-      </button> */}
-      <form css={barFormStyle(isMobileFormToggled)} onSubmit={onSubmitHandler}>
-        <CloseWindowButton onClickHandler={toggleMobileFormHandler} />
-        <InputSlider
-          id={"tankName"}
-          type={"text"}
-          name={"name"}
-          labelText={"tank name"}
-          value={formState.name}
-          onChange={onChangeHandler}
-        />
-        <InputSlider
-          id={"TankSizeX"}
-          type={"number"}
-          name={"sizeX"}
-          labelText={"tank size on X axis"}
-          value={formState.sizeX}
-          onChange={onChangeHandler}
-        />
-        <InputSlider
-          id={"TankSizeY"}
-          type={"number"}
-          name={"sizeY"}
-          labelText={"tank size on Y axis"}
-          value={formState.sizeY}
-          onChange={onChangeHandler}
-        />
-        <InputSlider
-          id={"TankSizeZ"}
-          type={"number"}
-          name={"sizeZ"}
-          labelText={"tank size on Z axis"}
-          value={formState.sizeZ}
-          onChange={onChangeHandler}
-        />
-        <InputSlider
-          id={"tankAquariumType"}
-          type={"text"}
-          name={"aquariumType"}
-          labelText={"aquarium type"}
-          value={formState.aquariumType}
-          onChange={onChangeHandler}
-        />
 
-        <FormButton btnText="Add tank" />
+      <form css={barFormStyle(isMobileFormToggled)} onSubmit={onSubmitHandler}>
+        {isLoading ? (
+          <LoadingDefault />
+        ) : (
+          <Fragment>
+            <CloseWindowButton onClickHandler={toggleMobileFormHandler} />
+            <InputSlider
+              id={"tankName"}
+              type={"text"}
+              name={"name"}
+              labelText={"tank name"}
+              value={formState.name}
+              onChange={onChangeHandler}
+            />
+            <InputSlider
+              id={"TankSizeX"}
+              type={"number"}
+              name={"sizeX"}
+              labelText={"tank size on X axis"}
+              value={formState.sizeX}
+              onChange={onChangeHandler}
+            />
+            <InputSlider
+              id={"TankSizeY"}
+              type={"number"}
+              name={"sizeY"}
+              labelText={"tank size on Y axis"}
+              value={formState.sizeY}
+              onChange={onChangeHandler}
+            />
+            <InputSlider
+              id={"TankSizeZ"}
+              type={"number"}
+              name={"sizeZ"}
+              labelText={"tank size on Z axis"}
+              value={formState.sizeZ}
+              onChange={onChangeHandler}
+            />
+            <InputSlider
+              id={"tankAquariumType"}
+              type={"text"}
+              name={"aquariumType"}
+              labelText={"aquarium type"}
+              value={formState.aquariumType}
+              onChange={onChangeHandler}
+            />
+            <FormButton btnText="Add tank" />{" "}
+          </Fragment>
+        )}
       </form>
     </section>
   );
