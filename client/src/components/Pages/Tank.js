@@ -5,6 +5,7 @@ import { Redirect } from "react-router-dom";
 import Dashboard from "../Dashboard/Dashboard";
 import TestsListing from "../Listings/TestsListing";
 import AddTestForm from "../Forms/AddTestForm";
+import LoadingDefault from "../atoms/loadings/LoadingDefault";
 // Utils
 import { getAuthHeader } from "../../utils/tokenUtils";
 
@@ -16,15 +17,18 @@ const Tank = ({ isUserLoggedIn, tokenState, match, addAlert }) => {
   } = match;
   const [tankState, setTankState] = useState([]);
   const [testsState, setTestsState] = useState([]);
+  const [isLoading, setIsloading] = useState(false);
 
   const populateTankAndTestsInformation = async (tokenState, tankID) => {
     const authHeader = getAuthHeader(tokenState);
+    setIsloading(true);
     const {
       data: { tank, tests },
     } = await axios.get(`/tanks/${tankID}`, { headers: authHeader });
     console.log(tests);
     setTankState(tank);
     setTestsState(tests);
+    setIsloading(false);
   };
 
   useEffect(() => {
@@ -42,7 +46,11 @@ const Tank = ({ isUserLoggedIn, tokenState, match, addAlert }) => {
           setTestsState={setTestsState}
           addAlert={addAlert}
         />
-        <TestsListing testsState={testsState} />
+        {isLoading ? (
+          <LoadingDefault />
+        ) : (
+          <TestsListing testsState={testsState} />
+        )}
       </Dashboard>
     );
   } else {

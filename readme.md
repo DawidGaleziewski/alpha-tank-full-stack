@@ -7,14 +7,14 @@
 - Updating tanks
 - Updating tests
 - Updating profile
-- Email confirmation
+- Email confirmation in form
 - Dates format
 - Loading - login form [x]
 - Loading - register form [x]
-- Loading - adding tanks
-- Loading - adding tests
-- Loading - fetching tanks
-- Loading - fetching tests
+- Loading - adding tanks [x]
+- Loading - adding tests [x]
+- Loading - fetching tanks [x]
+- Loading - fetching tests [x]
 - Error modal - login [x]
 - Error modal - adding tank [x]
 - Error modal - adding tests [x]
@@ -23,12 +23,15 @@
 - Register form toggle
 - page title and helmet
 - favicon
+- Tank page reload cancel axios call on unmount
 
 ## Backend
 
 - http flag cookies
 - new database on host (saving)
+- Email confirmation send to user email
+- google authentication
 
 ## Bugs
 
-- Reload on /tanks
+- Reload on /tanks/:id

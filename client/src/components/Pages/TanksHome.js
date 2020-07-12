@@ -6,17 +6,22 @@ import axios from "axios";
 import Dashboard from "../Dashboard/Dashboard";
 import AddTankForm from "../Forms/AddTankForm";
 import TankListing from "../Listings/TanksListing";
+import LoadingDefault from "../atoms/loadings/LoadingDefault";
 // Utils
 import { getAuthHeader } from "../../utils/tokenUtils";
 
 const TanksHome = ({ isUserLoggedIn, tokenState, addAlert }) => {
   const [tanksListingState, setTanksListingState] = useState([]);
+  const [isLoading, setIsloading] = useState(false);
   const populateTanksListing = async (tokenState) => {
     const authHeader = getAuthHeader(tokenState);
     try {
+      setIsloading(true);
       const { data } = await axios.get("/tanks", { headers: authHeader });
       setTanksListingState(data);
+      setIsloading(false);
     } catch (error) {
+      setIsloading(false);
       console.log(error);
     }
   };
@@ -34,7 +39,11 @@ const TanksHome = ({ isUserLoggedIn, tokenState, addAlert }) => {
             tanksListingState={tanksListingState}
             addAlert={addAlert}
           />
-          <TankListing tanksListingState={tanksListingState} />
+          {isLoading ? (
+            <LoadingDefault />
+          ) : (
+            <TankListing tanksListingState={tanksListingState} />
+          )}
         </Dashboard>
       </Fragment>
     );
