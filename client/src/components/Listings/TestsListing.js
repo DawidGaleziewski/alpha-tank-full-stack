@@ -35,7 +35,7 @@ const tableStyle = css`
   }
 `;
 
-const TestsListing = ({ testsState }) => {
+const TestsListing = ({ testsState, tokenState, setTestsState }) => {
   return (
     <section css={tableWrapper}>
       <table css={tableStyle}>
@@ -63,6 +63,10 @@ const TestsListing = ({ testsState }) => {
                 <DeleteBtn
                   btnText="Delete"
                   modalText="Are you sure you want to delete this?"
+                  tokenState={tokenState}
+                  testID={test._id}
+                  setTestsState={setTestsState}
+                  testsState={testsState}
                 />
               </td>
             </tr>

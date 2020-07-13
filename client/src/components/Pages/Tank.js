@@ -49,7 +49,11 @@ const Tank = ({ isUserLoggedIn, tokenState, match, addAlert }) => {
         {isLoading ? (
           <LoadingDefault />
         ) : (
-          <TestsListing testsState={testsState} />
+          <TestsListing
+            testsState={testsState}
+            tokenState={tokenState}
+            setTestsState={setTestsState}
+          />
         )}
       </Dashboard>
     );
