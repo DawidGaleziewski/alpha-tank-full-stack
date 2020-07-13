@@ -19,6 +19,11 @@ const Tank = ({ isUserLoggedIn, tokenState, match, addAlert }) => {
   const [testsState, setTestsState] = useState([]);
   const [isLoading, setIsloading] = useState(false);
 
+  const removeTestFromState = (testID) => {
+    console.log("Honker remover");
+    setTestsState(testsState.filter((test) => test._id !== testID));
+  };
+
   const populateTankAndTestsInformation = async (tokenState, tankID) => {
     const authHeader = getAuthHeader(tokenState);
     setIsloading(true);
@@ -53,6 +58,7 @@ const Tank = ({ isUserLoggedIn, tokenState, match, addAlert }) => {
             testsState={testsState}
             tokenState={tokenState}
             setTestsState={setTestsState}
+            removeTestFromState={removeTestFromState}
           />
         )}
       </Dashboard>

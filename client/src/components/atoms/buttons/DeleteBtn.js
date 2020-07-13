@@ -49,8 +49,10 @@ const DeleteBtn = ({
   modalText,
   tokenState,
   testID,
-  setTestsState,
-  testsState,
+  // setTestsState,
+  // testsState,
+  removeItemFromState,
+  endpointURL,
 }) => {
   const toggleModalHandler = () => {
     setIsToggled(!isToggled);
@@ -58,17 +60,15 @@ const DeleteBtn = ({
 
   const [isToggled, setIsToggled] = useState(false);
   const [isLoading, setIsloading] = useState(false);
-  const deleteTest = async (testID, tokenState) => {
-    console.log(testID, tokenState);
+  const deleteItem = async (testID, tokenState) => {
     try {
       setIsloading(true);
       const authHeader = getAuthHeader(tokenState);
-      console.log(authHeader);
-      // const deletedElement =
-      await axios.delete(`/tests/${testID}`, {
+      await axios.delete(`${endpointURL}/${testID}`, {
         headers: authHeader,
       });
-      setTestsState(testsState.filter((test) => test._id !== testID));
+
+      removeItemFromState(testID);
       setIsloading(false);
     } catch (error) {
       console.log(error);
@@ -77,7 +77,7 @@ const DeleteBtn = ({
   };
 
   const onConfimHandler = () => {
-    deleteTest(testID, tokenState);
+    deleteItem(testID, tokenState);
   };
   return (
     <Fragment>

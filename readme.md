@@ -3,7 +3,7 @@
 ## FrontEnd
 
 - Deleting tanks
-- Deleting tests
+- Deleting tests [x]
 - Updating tanks
 - Updating tests
 - Updating profile

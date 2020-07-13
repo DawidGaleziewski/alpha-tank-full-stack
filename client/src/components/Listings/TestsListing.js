@@ -35,7 +35,7 @@ const tableStyle = css`
   }
 `;
 
-const TestsListing = ({ testsState, tokenState, setTestsState }) => {
+const TestsListing = ({ testsState, tokenState, removeTestFromState }) => {
   return (
     <section css={tableWrapper}>
       <table css={tableStyle}>
@@ -65,8 +65,10 @@ const TestsListing = ({ testsState, tokenState, setTestsState }) => {
                   modalText="Are you sure you want to delete this?"
                   tokenState={tokenState}
                   testID={test._id}
-                  setTestsState={setTestsState}
-                  testsState={testsState}
+                  removeItemFromState={removeTestFromState}
+                  // setTestsState={setTestsState}
+                  // testsState={testsState}
+                  endpointURL="/tests"
                 />
               </td>
             </tr>
