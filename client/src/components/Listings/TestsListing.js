@@ -1,5 +1,6 @@
 import React from "react";
 import { css, jsx } from "@emotion/core";
+import { formatDateYYYYMMDD } from "../../utils/generalUtils";
 
 import DeleteBtn from "../atoms/buttons/DeleteBtn";
 
@@ -53,7 +54,7 @@ const TestsListing = ({ testsState, tokenState, removeTestFromState }) => {
         <tbody>
           {testsState.map((test) => (
             <tr key={test._id}>
-              <td>{test.dateOfTest}</td>
+              <td>{formatDateYYYYMMDD(test.dateOfTest)}</td>
               <td>{test.nh3}</td>
               <td>{test.nh4}</td>
               <td>{test.no3}</td>

@@ -35,4 +35,24 @@ const deepCopy = (obj) => {
   return newObj;
 };
 
-export { pipe, setCookie, deleteFromCookie, getCookie, deepCopy };
+const formatTwoDigits = (number) => {
+  const string = number.toString();
+  return string.length > 1 ? string : "0" + string;
+};
+
+const formatDateYYYYMMDD = (dateString) => {
+  const dateObject = new Date(dateString);
+  const month = formatTwoDigits(dateObject.getUTCMonth());
+  const day = formatTwoDigits(dateObject.getDate());
+  const formatedDateString = `${dateObject.getFullYear()}-${month}-${day}`;
+  return formatedDateString;
+};
+
+export {
+  pipe,
+  setCookie,
+  deleteFromCookie,
+  getCookie,
+  deepCopy,
+  formatDateYYYYMMDD,
+};
