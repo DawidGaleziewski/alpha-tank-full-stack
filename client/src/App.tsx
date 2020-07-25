@@ -48,11 +48,11 @@ const globalStyles = css`
 `;
 
 function App() {
-  const [tokenState, setTokenState] = useState(null);
+  const [tokenState, setTokenState] = useState<string | null>(null);
   const [userAccountInfo, setUserAccountInfo] = useState({});
   const [isUserLoggedIn, setIsUserLoggedIn] = useState(false);
-  const [alerts, setAlerts] = useState([]);
-  const loginOnMount = async (isUserLoggedIn, tokenState) => {
+  const [alerts, setAlerts] = useState<any>([]);
+  const loginOnMount = async (isUserLoggedIn: any, tokenState: any) => {
     const token = getUserToken(tokenState);
     // console.log("token is:", token);
     if (!isUserLoggedIn && token) {
@@ -84,10 +84,14 @@ function App() {
 
   // useEffect(() => {}, [alerts]);
 
-  const addAlert = (alertType, alertText, alertTimeMilliseconds) => {
+  const addAlert = (
+    alertType: any,
+    alertText: any,
+    alertTimeMilliseconds: any
+  ) => {
     const id = uuidv4();
     // const interval = expireAlertInterval(id, alertTimeMilliseconds);
-    setAlerts([
+    const updatedAlerts = [
       ...alerts,
       {
         text: alertText,
@@ -95,10 +99,11 @@ function App() {
         id: id,
         // interval: interval,
       },
-    ]);
+    ];
+    setAlerts(updatedAlerts);
   };
 
-  const lastTimeout = useRef(null);
+  const lastTimeout = useRef<any>(null);
 
   useEffect(() => {
     if (alerts.length > 0) {
@@ -110,7 +115,7 @@ function App() {
     }
   }, [alerts]);
 
-  const removeAlert = (id) => {
+  const removeAlert = (id: any) => {
     console.log(id);
     setAlerts([...alerts].filter((alert) => alert.id !== id));
   };
@@ -122,7 +127,7 @@ function App() {
         <MainContainer
           setIsUserLoggedIn={setIsUserLoggedIn}
           setTokenState={setTokenState}
-          setAlerts={setAlerts}
+          // setAlerts={setAlerts}
           alerts={alerts}
           removeAlert={removeAlert}
         >
@@ -133,7 +138,7 @@ function App() {
               <Login
                 isUserLoggedIn={isUserLoggedIn}
                 setIsUserLoggedIn={setIsUserLoggedIn}
-                tokenState={tokenState}
+                // tokenState={tokenState}
                 setTokenState={setTokenState}
                 addAlert={addAlert}
               />
@@ -170,7 +175,7 @@ function App() {
               <UserProfile
                 userAccountInfo={userAccountInfo}
                 isUserLoggedIn={isUserLoggedIn}
-                setIsUserLoggedIn={setIsUserLoggedIn}
+                // setIsUserLoggedIn={setIsUserLoggedIn}
               />
             )}
           />

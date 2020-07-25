@@ -1,6 +1,6 @@
 import { pipe, getCookie } from "./generalUtils";
 
-const getAuthHeader = (tokenState) => {
+const getAuthHeader = (tokenState: string) => {
   return pipe(
     getUserToken,
     formatBearerToken,
@@ -8,7 +8,7 @@ const getAuthHeader = (tokenState) => {
   )(tokenState);
 };
 
-const formatAuthorizationHeader = (bearerToken) => {
+const formatAuthorizationHeader = (bearerToken: string) => {
   if (!bearerToken) {
     return null;
   }
@@ -17,7 +17,7 @@ const formatAuthorizationHeader = (bearerToken) => {
   };
 };
 
-const formatBearerToken = (userToken) => {
+const formatBearerToken = (userToken: string) => {
   if (!userToken) {
     return null;
   }
@@ -25,7 +25,7 @@ const formatBearerToken = (userToken) => {
   return bearerToken;
 };
 
-const getUserToken = (tokenState) => {
+const getUserToken = (tokenState: string) => {
   let userToken = null;
 
   if (tokenState) {

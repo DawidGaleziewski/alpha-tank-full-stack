@@ -1,6 +1,7 @@
-const pipe = (...fns) => (x) => fns.reduce((v, f) => f(v), x);
+const pipe = (...fns: Array<Function>) => (x: any) =>
+  fns.reduce((v, f) => f(v), x);
 
-const setCookie = (label, data) => {
+const setCookie = (label: string, data: string) => {
   try {
     // console.log("label:", label, "data", data);
     document.cookie = `${label}=${data}`;
@@ -9,14 +10,14 @@ const setCookie = (label, data) => {
   }
 };
 
-const deleteFromCookie = (label) => {
+const deleteFromCookie = (label: string) => {
   document.cookie = `${label}= ; expires = Thu, 01 Jan 1970 00:00:00 GMT`;
 };
 
-const getCookie = (label) => {
+const getCookie = (label: string) => {
   let cookieValue = null;
   try {
-    if (document.cookie.indexOf(label !== 0)) {
+    if (document.cookie.indexOf(label) !== 0) {
       cookieValue = document.cookie
         .split(";")
         .filter((row) => row.indexOf(label) !== -1)[0]
@@ -30,17 +31,17 @@ const getCookie = (label) => {
   return cookieValue;
 };
 
-const deepCopy = (obj) => {
+const deepCopy = (obj: {}) => {
   const newObj = JSON.parse(JSON.stringify(obj));
   return newObj;
 };
 
-const formatTwoDigits = (number) => {
+const formatTwoDigits = (number: number): number => {
   const string = number.toString();
-  return string.length > 1 ? string : "0" + string;
+  return string.length > 1 ? +string : Number("0" + string);
 };
 
-const formatDateYYYYMMDD = (dateString) => {
+const formatDateYYYYMMDD = (dateString: string) => {
   const dateObject = new Date(dateString);
   const month = formatTwoDigits(dateObject.getUTCMonth());
   const day = formatTwoDigits(dateObject.getDate());
