@@ -25,7 +25,7 @@ const formatBearerToken = (userToken: string) => {
   return bearerToken;
 };
 
-const getUserToken = (tokenState: string) => {
+const getUserToken = (tokenState: string | null) => {
   let userToken = null;
 
   if (tokenState) {
