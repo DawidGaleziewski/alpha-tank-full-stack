@@ -23,14 +23,17 @@
 
 ## Bugs
 
-- Reload on /tanks/:id
+- Google search for site:tank-kit.com shows bad meta data
 
 ## Refactor
+
+- refactor components into using typescript
 
 =================
 
 ## Done
 
+- Added typescript to CRA
 - Dates format [x]
 - Loading - login form [x]
 - Loading - register form [x]
@@ -43,3 +46,4 @@
 - Error modal - adding tests [x]
 - Deleting tests [x]
 - favicon [x]
+- Reload on /tanks/:id [x]
