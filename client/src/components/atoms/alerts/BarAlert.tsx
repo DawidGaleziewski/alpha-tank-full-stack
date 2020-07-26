@@ -1,8 +1,12 @@
 import React from "react";
 import { jsx, css } from "@emotion/core";
+
+// Typescript types
+import AlertTypes from "../../../types/alertTypes";
+
 /**@jsx jsx */
 
-const alertStyle = (alertType) => {
+const alertStyle = (alertType: AlertTypes) => {
   let backgroundColor = "";
   let color = "";
 
@@ -51,8 +55,18 @@ const closeBtnStyle = css`
   display: block;
 `;
 
-const BarAlert = ({ alertText, alertType, removeAlert, id }) => {
-  const closeBtnClickHandler = (event) => {
+const BarAlert = ({
+  alertText,
+  alertType,
+  removeAlert,
+  id,
+}: {
+  alertText: string;
+  alertType: AlertTypes;
+  removeAlert: Function;
+  id: string;
+}) => {
+  const closeBtnClickHandler = () => {
     removeAlert(id);
   };
   return (
