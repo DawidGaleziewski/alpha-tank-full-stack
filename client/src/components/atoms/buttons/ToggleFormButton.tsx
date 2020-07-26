@@ -18,7 +18,13 @@ const formToggleStyle = css`
   }
 `;
 
-const ToggleFormButton = ({ buttonText, onClickHandler }) => {
+const ToggleFormButton = ({
+  buttonText,
+  onClickHandler,
+}: {
+  buttonText: string;
+  onClickHandler: () => {};
+}) => {
   return (
     <button onClick={onClickHandler} css={formToggleStyle}>
       {buttonText}

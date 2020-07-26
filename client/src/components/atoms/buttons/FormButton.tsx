@@ -15,7 +15,13 @@ const buttonStyle = css`
   width: 100%;
 `;
 
-const FormButton = ({ btnText, autoFocus }) => {
+const FormButton = ({
+  btnText,
+  autoFocus,
+}: {
+  btnText: string;
+  autoFocus: boolean;
+}) => {
   const googleAnalyticsHandler = () => {
     ReactGA.event({
       category: "Button",
