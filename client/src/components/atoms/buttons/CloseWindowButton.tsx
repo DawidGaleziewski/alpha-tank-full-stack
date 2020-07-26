@@ -19,7 +19,11 @@ const buttonStyle = css`
   }
 `;
 
-const CloseWindowButton = ({ onClickHandler }) => {
+const CloseWindowButton = ({
+  onClickHandler,
+}: {
+  onClickHandler: () => {};
+}) => {
   return (
     <button
       onClick={onClickHandler}

@@ -1,5 +1,5 @@
 import React, { useState, Fragment } from "react";
-import LoadingDefault from "../../atoms/loadings/LoadingDefault";
+import LoadingDefault from "../loadings/LoadingDefault";
 import { getAuthHeader } from "../../../utils/tokenUtils";
 import axios from "axios";
 
@@ -28,7 +28,7 @@ const modalStyle = css`
   }
 `;
 
-const deleteBtnStyle = (isToggled) => css`
+const deleteBtnStyle = (isToggled: boolean) => css`
 ${buttonStyle}
 background-color: ${isToggled ? "#5f5f5f" : "#db2828"} ;
 cursor: ${isToggled ? "not-allowed" : "pointer"}  ;
@@ -53,6 +53,13 @@ const DeleteBtn = ({
   // testsState,
   removeItemFromState,
   endpointURL,
+}: {
+  btnText: string;
+  modalText: string;
+  tokenState: string;
+  testID: string;
+  removeItemFromState: (testID: string) => {};
+  endpointURL: string;
 }) => {
   const toggleModalHandler = () => {
     setIsToggled(!isToggled);
@@ -60,7 +67,7 @@ const DeleteBtn = ({
 
   const [isToggled, setIsToggled] = useState(false);
   const [isLoading, setIsloading] = useState(false);
-  const deleteItem = async (testID, tokenState) => {
+  const deleteItem = async (testID: string, tokenState: string) => {
     try {
       setIsloading(true);
       const authHeader = getAuthHeader(tokenState);
