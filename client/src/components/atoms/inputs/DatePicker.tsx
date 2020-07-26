@@ -28,13 +28,21 @@ const inputWrapperStyle = css`
   }
 `;
 
-const DatePicker = ({ id, name, labelText, value, onChangeHandler }) => {
+const DatePicker = ({
+  id,
+  name,
+  labelText,
+  value,
+  onChangeHandler,
+}: {
+  id: string;
+  name: string;
+  labelText: string;
+  value: string;
+  onChangeHandler: () => {};
+}) => {
   return (
-    <div
-      className="input-slider-wrapper--date"
-      css={inputWrapperStyle}
-      className="inputWrapper"
-    >
+    <div className="input-slider-wrapper--date" css={inputWrapperStyle}>
       <input
         id={id}
         type="date"

@@ -21,7 +21,11 @@ const linkStyle = css`
   display: block;
 `;
 
-const TankCard = ({ tankData }) => {
+const TankCard = ({
+  tankData,
+}: {
+  tankData: { _id: string; name: string };
+}) => {
   return (
     <li className="tank-card" css={tankCardStyle}>
       <Link css={linkStyle} to={`/tanks/${tankData._id}`}>
