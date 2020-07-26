@@ -15,7 +15,15 @@ const buttonStyle = css`
   font-size: 1.2rem;
 `;
 
-const LogoutButton = ({ btnText, setIsUserLoggedIn, setTokenState }) => {
+const LogoutButton = ({
+  btnText,
+  setIsUserLoggedIn,
+  setTokenState,
+}: {
+  btnText: string;
+  setIsUserLoggedIn: (isLogged: boolean) => {};
+  setTokenState: (tokenState: null | string) => {};
+}) => {
   const onClickHandler = () => {
     deleteFromCookie("token");
     setIsUserLoggedIn(false);
