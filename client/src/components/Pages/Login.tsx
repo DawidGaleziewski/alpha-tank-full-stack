@@ -8,6 +8,11 @@ const Login = ({
   setTokenState,
   isUserLoggedIn,
   addAlert,
+}: {
+  setIsUserLoggedIn: any;
+  setTokenState: any;
+  isUserLoggedIn: boolean;
+  addAlert: (alertType: string, alertText: string) => void;
 }) => {
   if (isUserLoggedIn) {
     return <Redirect to={"/tanks"} />;

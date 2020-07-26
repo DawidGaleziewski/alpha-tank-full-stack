@@ -10,10 +10,18 @@ import LoadingDefault from "../atoms/loadings/LoadingDefault";
 // Utils
 import { getAuthHeader } from "../../utils/tokenUtils";
 
-const TanksHome = ({ isUserLoggedIn, tokenState, addAlert }) => {
+const TanksHome = ({
+  isUserLoggedIn,
+  tokenState,
+  addAlert,
+}: {
+  isUserLoggedIn: boolean;
+  tokenState: string | null;
+  addAlert: (alertType: any, alertText: any) => void;
+}) => {
   const [tanksListingState, setTanksListingState] = useState([]);
   const [isLoading, setIsloading] = useState(false);
-  const populateTanksListing = async (tokenState) => {
+  const populateTanksListing = async (tokenState: string) => {
     const authHeader = getAuthHeader(tokenState);
     try {
       setIsloading(true);
@@ -26,7 +34,9 @@ const TanksHome = ({ isUserLoggedIn, tokenState, addAlert }) => {
     }
   };
   useEffect(() => {
-    isUserLoggedIn && populateTanksListing();
+    if (isUserLoggedIn && tokenState) {
+      populateTanksListing(tokenState);
+    }
   }, [isUserLoggedIn, tokenState]);
 
   if (isUserLoggedIn) {

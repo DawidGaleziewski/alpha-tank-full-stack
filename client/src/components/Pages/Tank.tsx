@@ -9,22 +9,32 @@ import LoadingDefault from "../atoms/loadings/LoadingDefault";
 // Utils
 import { getAuthHeader } from "../../utils/tokenUtils";
 
-const Tank = ({ isUserLoggedIn, tokenState, match, addAlert }) => {
-  console.log(isUserLoggedIn, tokenState, match);
-  console.log(isUserLoggedIn);
+const Tank = ({
+  isUserLoggedIn,
+  tokenState,
+  match,
+  addAlert,
+}: {
+  isUserLoggedIn: boolean;
+  tokenState: string | null;
+  match: any;
+  addAlert: (alertType: any, alertText: any) => void;
+}) => {
   const {
     params: { tankID },
   } = match;
-  const [tankState, setTankState] = useState([]);
-  const [testsState, setTestsState] = useState([]);
-  const [isLoading, setIsloading] = useState(false);
+  const [tankState, setTankState] = useState<any>([]);
+  const [testsState, setTestsState] = useState<any | any>([]);
+  const [isLoading, setIsloading] = useState<any>(false);
 
-  const removeTestFromState = (testID) => {
-    console.log("Honker remover");
-    setTestsState(testsState.filter((test) => test._id !== testID));
+  const removeTestFromState = (testID: string) => {
+    setTestsState(testsState.filter((test: any) => test._id !== testID));
   };
 
-  const populateTankAndTestsInformation = async (tokenState, tankID) => {
+  const populateTankAndTestsInformation = async (
+    tokenState: string,
+    tankID: string
+  ) => {
     const authHeader = getAuthHeader(tokenState);
     setIsloading(true);
     const {
@@ -37,7 +47,9 @@ const Tank = ({ isUserLoggedIn, tokenState, match, addAlert }) => {
   };
 
   useEffect(() => {
-    populateTankAndTestsInformation(tokenState, tankID);
+    if (tokenState) {
+      populateTankAndTestsInformation(tokenState, tankID);
+    }
   }, [tokenState, tankID]);
 
   if (isUserLoggedIn) {

@@ -23,7 +23,7 @@ import globalStyles from "./globalStyles";
 function App() {
   const [tokenState, setTokenState] = useState<string | null>(null);
   const [userAccountInfo, setUserAccountInfo] = useState({});
-  const [isUserLoggedIn, setIsUserLoggedIn] = useState(false);
+  const [isUserLoggedIn, setIsUserLoggedIn] = useState<boolean>(false);
   const [alerts, setAlerts] = useState<any>([]);
 
   useEffect(() => {
