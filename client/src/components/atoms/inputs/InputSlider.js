@@ -29,13 +29,18 @@ const InputSlider = ({ id, type, name, labelText, value, onChange }) => {
     color: #92a2ae;
     transform: translate(-10%, -170%) scale(0.8);
 
-    input:placeholder-shown + &,
-    input::not(-webkit-autofill) {
+    input:placeholder-shown + & {
       transform: translate(0, -50%);
     }
+
+    input:-webkit-autofill + & {
+      transform: translate(-10%, -170%) scale(0.8);
+    }
+
     transition: all ease-in 0.3s;
     pointer-events: none;
   `;
+
   return (
     <div className="input-slider-wrapper" css={inputWrapperStyle}>
       <input
