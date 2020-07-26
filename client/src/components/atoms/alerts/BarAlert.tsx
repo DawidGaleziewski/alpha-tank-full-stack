@@ -2,7 +2,7 @@ import React from "react";
 import { jsx, css } from "@emotion/core";
 
 // Typescript types
-import AlertTypes from "../../../types/alertTypes";
+import AlertTypes from "../../../types/AlertTypes";
 
 /**@jsx jsx */
 
